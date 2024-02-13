@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HogwartsStudentAdminApplication {
+public class StudentAdmin {
 
     public static void main(String[] args) {
-        SpringApplication.run(HogwartsStudentAdminApplication.class, args);
+        SpringApplication.run(StudentAdmin.class, args);
     }
 
 }

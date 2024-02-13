@@ -1,0 +1,61 @@
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.models;
+
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+public class House {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String name;
+    private String founder;
+
+    @ElementCollection
+    private List<String> colors;
+
+    // Constructors
+    public House() {
+    }
+
+    public House(String name, String founder, List<String> colors) {
+        this.name = name;
+        this.founder = founder;
+        this.colors = colors;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFounder() {
+        return founder;
+    }
+
+    public void setFounder(String founder) {
+        this.founder = founder;
+    }
+
+    public List<String> getColors() {
+        return colors;
+    }
+
+    public void setColors(List<String> colors) {
+        this.colors = colors;
+    }
+}

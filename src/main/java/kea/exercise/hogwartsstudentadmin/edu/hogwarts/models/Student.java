@@ -1,6 +1,7 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
@@ -9,14 +10,36 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "First name is mandatory")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     private String firstName;
+
+    @Size(max = 75, message = "Middle name must be less than 50 characters")
     private String middleName;
+
+    @NotBlank(message = "Last name is mandatory")
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
+
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
+
+    @NotNull(message = "House is mandatory")
     private @ManyToOne(fetch = FetchType.EAGER) House house;
+
+    @NotNull(message = "Prefect status is mandatory")
     private boolean isPrefect;
+
+    @NotNull(message = "Enrollment year is mandatory")
+    @Min(value = 1900, message = "Enrollment year must be after 1900")
     private int enrollmentYear;
+
+    @NotNull(message = "Graduation year is mandatory")
+    @Min(value = 1900, message = "Graduation year must be after 1900")
     private int graduationYear;
+
+    @NotNull(message = "Graduated status is mandatory")
     private boolean isGraduated;
 
     public Student() {
@@ -116,5 +139,21 @@ public class Student {
 
     public void setGraduated(boolean graduated) {
         isGraduated = graduated;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", house=" + house +
+                ", isPrefect=" + isPrefect +
+                ", enrollmentYear=" + enrollmentYear +
+                ", graduationYear=" + graduationYear +
+                ", isGraduated=" + isGraduated +
+                '}';
     }
 }

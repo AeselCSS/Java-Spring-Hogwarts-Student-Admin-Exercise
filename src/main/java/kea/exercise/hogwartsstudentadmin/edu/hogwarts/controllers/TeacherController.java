@@ -1,7 +1,9 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.controllers;
 
+import jakarta.validation.Valid;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Teacher;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.TeacherRepository;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,50 +13,39 @@ import java.util.List;
 @RestController
 public class TeacherController {
     @Autowired
-    private TeacherRepository teacherRepository;
+    private TeacherService teacherService;
 
     @GetMapping("/teachers")
     public List<Teacher> getAllTeachers() {
-        return teacherRepository.findAll();
+        return teacherService.findAllTeachers();
     }
 
     @GetMapping("/teachers/{id}")
     public ResponseEntity<Teacher> getTeacherById(@PathVariable Long id) {
-        return teacherRepository.findById(id)
+        return teacherService.findTeacherById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/teachers")
-    public Teacher createTeacher(@RequestBody Teacher teacher) {
-        return teacherRepository.save(teacher);
+    public ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher) {
+        Teacher savedTeacher = teacherService.saveTeacher(teacher);
+        return ResponseEntity.ok(savedTeacher);
     }
 
     @PutMapping("/teachers/{id}")
-    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @RequestBody Teacher teacher) {
-        return teacherRepository.findById(id)
-                .map(teacherObj -> {
-                    teacherObj.setFirstName(teacher.getFirstName());
-                    teacherObj.setMiddleName(teacher.getMiddleName());
-                    teacherObj.setLastName(teacher.getLastName());
-                    teacherObj.setDateOfBirth(teacher.getDateOfBirth());
-                    teacherObj.setHouse(teacher.getHouse());
-                    teacherObj.setHeadOfHouse(teacher.isHeadOfHouse());
-                    teacherObj.setEmployment(teacher.getEmployment());
-                    teacherObj.setEmploymentStart(teacher.getEmploymentStart());
-                    teacherObj.setEmploymentEnd(teacher.getEmploymentEnd());
-                    Teacher updatedTeacher = teacherRepository.save(teacherObj);
-                    return ResponseEntity.ok().body(updatedTeacher);
-                }).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @Valid @RequestBody Teacher teacher) {
+        return teacherService.findTeacherById(id)
+                .map(teacherObj -> ResponseEntity.ok().body(teacherService.updateTeacher(teacherObj, teacher)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/teachers/{id}")
     public ResponseEntity<Teacher> deleteTeacher(@PathVariable Long id) {
-        if (teacherRepository.existsById(id)) {
-            teacherRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return teacherService.findTeacherById(id)
+                .map(teacher -> {
+                    teacherService.deleteTeacher(id);
+                    return ResponseEntity.ok().<Teacher>build();
+                }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

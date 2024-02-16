@@ -1,9 +1,7 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.config;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.House;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Teacher;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.EmpType;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.*;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.CourseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.HouseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.StudentRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.TeacherRepository;
@@ -27,6 +25,14 @@ public class InitData implements ApplicationRunner {
     private TeacherRepository teacherRepository;
     @Autowired
     private HouseRepository houseRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+
+    House gryffindor;
+    House hufflepuff;
+    House ravenclaw;
+    House slytherin;
+
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -35,6 +41,11 @@ public class InitData implements ApplicationRunner {
             House hufflepuff = new House("Hufflepuff", "Helga Hufflepuff", new ArrayList<>(Arrays.asList("Yellow", "Black")));
             House ravenclaw = new House("Ravenclaw", "Rowena Ravenclaw", new ArrayList<>(Arrays.asList("Blue", "Bronze")));
             House slytherin = new House("Slytherin", "Salazar Slytherin", new ArrayList<>(Arrays.asList("Green", "Silver")));
+
+            this.gryffindor = gryffindor;
+            this.hufflepuff = hufflepuff;
+            this.ravenclaw = ravenclaw;
+            this.slytherin = slytherin;
 
             houseRepository.save(gryffindor);
             houseRepository.save(hufflepuff);
@@ -45,11 +56,6 @@ public class InitData implements ApplicationRunner {
         if (studentRepository.count() == 0) {
             List<Student> students = new ArrayList<>();
             // get houses from the database
-            House gryffindor = houseRepository.findByName("Gryffindor");
-            House hufflepuff = houseRepository.findByName("Hufflepuff");
-            House ravenclaw = houseRepository.findByName("Ravenclaw");
-            House slytherin = houseRepository.findByName("Slytherin");
-
             students.add(new Student("Harry", "James", "Potter", LocalDate.of(1980, Month.JULY, 31), gryffindor, false, 1991, 1998, false));
             students.add(new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, Month.SEPTEMBER, 19), gryffindor, false, 1991, 1998, false));
             students.add(new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, Month.MARCH, 1), gryffindor, false, 1991, 1998, false));
@@ -69,11 +75,6 @@ public class InitData implements ApplicationRunner {
         if (teacherRepository.count() == 0) {
             List<Teacher> teachers = new ArrayList<>();
 
-            House gryffindor = houseRepository.findByName("Gryffindor");
-            House hufflepuff = houseRepository.findByName("Hufflepuff");
-            House ravenclaw = houseRepository.findByName("Ravenclaw");
-            House slytherin = houseRepository.findByName("Slytherin");
-
             EmpType tenured = EmpType.TENURED;
             EmpType temporary = EmpType.TEMPORARY;
 
@@ -85,8 +86,21 @@ public class InitData implements ApplicationRunner {
             teachers.add(new Teacher("Alastor", "Moody", LocalDate.of(1960, Month.JANUARY, 1), gryffindor, false, temporary, LocalDate.of(1994, Month.SEPTEMBER, 1), LocalDate.of(1997, Month.JUNE, 30)));
             teachers.add(new Teacher("Remus", "Lupin", LocalDate.of(1960, Month.MARCH, 10), gryffindor, false, temporary, LocalDate.of(1993, Month.SEPTEMBER, 1), LocalDate.of(1997, Month.JUNE, 30)));
 
-
             teacherRepository.saveAll(teachers);
+        }
+
+        if (courseRepository.count() == 0) {
+            List<Teacher> teachers = teacherRepository.findAll();
+            List<Student> students = studentRepository.findAll();
+            List<Course> courses = new ArrayList<>();
+
+            courses.add(new Course("Transfiguration", 1, true, teachers.get(0), students.subList(0, 12)));
+            courses.add(new Course("Herbology", 1, true, teachers.get(1), students.subList(0, 12)));
+            courses.add(new Course("Charms", 1, true, teachers.get(2), students.subList(0, 12)));
+            courses.add(new Course("Potions", 1, true, teachers.get(3), students.subList(0, 12)));
+            courses.add(new Course("Defense Against the Dark Arts", 3, true, teachers.get(6), students.subList(0, 12)));
+
+            courseRepository.saveAll(courses);
         }
     }
 }

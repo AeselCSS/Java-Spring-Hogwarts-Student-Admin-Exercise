@@ -1,45 +1,38 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.models;
 
 import jakarta.persistence.*;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.validator.MaxListSize;
 
 import java.util.List;
 
 @Entity
 public class House {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
+    private @Enumerated(EnumType.STRING) HouseName name;
     private String founder;
 
     @ElementCollection
+    @MaxListSize(value = 2, message = "You can only have up to 2 colors")
     private List<String> colors;
 
     // Constructors
     public House() {
     }
 
-    public House(String name, String founder, List<String> colors) {
+    public House(HouseName name, String founder, List<String> colors) {
         this.name = name;
         this.founder = founder;
         this.colors = colors;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getName() {
+    public HouseName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(HouseName name) {
         this.name = name;
     }
 

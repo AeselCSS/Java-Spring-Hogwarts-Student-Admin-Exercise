@@ -9,11 +9,6 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-  DATABASE_USER: ${{ secrets.DATABASE_USER }}
-  DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-
 jobs:
   build:
     runs-on: ubuntu-latest

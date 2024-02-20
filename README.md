@@ -1,0 +1,1 @@
+[![Build and deploy JAR app to Azure Web App - Hogwarts-student-admin](https://github.com/AeselCSS/Java-Spring-Hogwarts-Student-Admin-Exercise/actions/workflows/main_hogwarts-student-admin.yml/badge.svg)](https://github.com/AeselCSS/Java-Spring-Hogwarts-Student-Admin-Exercise/actions/workflows/main_hogwarts-student-admin.yml)

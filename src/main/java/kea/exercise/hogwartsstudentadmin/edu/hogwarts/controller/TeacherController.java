@@ -1,9 +1,8 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.controllers;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.controller;
 
 import jakarta.validation.Valid;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Teacher;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.TeacherRepository;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.services.TeacherService;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

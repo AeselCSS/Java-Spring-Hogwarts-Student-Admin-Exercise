@@ -1,12 +1,12 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.services;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exceptions.ResourceNotFoundHandler;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Course;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Teacher;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.CourseRepository;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.StudentRepository;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.TeacherRepository;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.ResourceNotFoundHandler;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.CourseRepository;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.StudentRepository;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

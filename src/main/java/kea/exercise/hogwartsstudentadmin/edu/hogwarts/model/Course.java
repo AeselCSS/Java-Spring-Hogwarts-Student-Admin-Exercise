@@ -1,4 +1,4 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.models;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.model;
 
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;

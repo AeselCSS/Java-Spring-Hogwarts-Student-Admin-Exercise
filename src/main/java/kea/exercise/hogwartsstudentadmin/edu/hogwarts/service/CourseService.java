@@ -1,8 +1,8 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.services;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Course;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Teacher;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import java.util.List;
 import java.util.Optional;
 

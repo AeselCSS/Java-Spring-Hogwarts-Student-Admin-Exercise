@@ -1,4 +1,4 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.exceptions;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

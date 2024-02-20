@@ -1,7 +1,6 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.services;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Student;
-import org.springframework.http.ResponseEntity;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 
 import java.util.List;
 import java.util.Optional;

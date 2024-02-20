@@ -1,7 +1,7 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.services;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories.StudentRepository;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.StudentRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

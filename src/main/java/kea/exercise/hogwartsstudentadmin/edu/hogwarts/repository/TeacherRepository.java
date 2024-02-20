@@ -1,6 +1,6 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.Teacher;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {

@@ -1,6 +1,6 @@
-package kea.exercise.hogwartsstudentadmin.edu.hogwarts.repositories;
+package kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.models.House;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.House;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HouseRepository extends JpaRepository<House, Long> {

@@ -1,7 +1,11 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.validator.MaxListSize;
+
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.*;
 
 import java.util.List;
 
@@ -25,11 +29,12 @@ public class House {
         this.colors = colors;
     }
 
-    // Getters and Setters
-
-
     public HouseName getName() {
         return name;
+    }
+
+    public String getHouseName() {
+        return toTitleCase(name.toString());
     }
 
     public void setName(HouseName name) {

@@ -1,9 +1,9 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.controller;
 
 import jakarta.validation.Valid;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.TeacherDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +11,23 @@ import java.util.List;
 
 @RestController
 public class TeacherController {
-    @Autowired
-    private TeacherService teacherService;
+    private final TeacherService teacherService;
+
+    public TeacherController(TeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
 
     @GetMapping("/teachers")
-    public List<Teacher> getAllTeachers() {
-        return teacherService.findAllTeachers();
+    public List<TeacherDTO> getAllTeachers() {
+        return teacherService.findAllTeachers().stream()
+                .map(teacherService::convertToDTO)
+                .toList();
     }
 
     @GetMapping("/teachers/{id}")
-    public ResponseEntity<Teacher> getTeacherById(@PathVariable Long id) {
+    public ResponseEntity<TeacherDTO> getTeacherById(@PathVariable Long id) {
         return teacherService.findTeacherById(id)
+                .map(teacherService::convertToDTO)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -33,18 +39,22 @@ public class TeacherController {
     }
 
     @PutMapping("/teachers/{id}")
-    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @Valid @RequestBody Teacher teacher) {
+    public ResponseEntity<TeacherDTO> updateTeacher(@PathVariable Long id, @Valid @RequestBody Teacher teacher) {
         return teacherService.findTeacherById(id)
-                .map(teacherObj -> ResponseEntity.ok().body(teacherService.updateTeacher(teacherObj, teacher)))
+                .map(teacherObj -> {
+                    Teacher updatedTeacher = teacherService.updateTeacher(teacherObj, teacher);
+                    return ResponseEntity.ok().body(teacherService.convertToDTO(updatedTeacher));
+                })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/teachers/{id}")
-    public ResponseEntity<Teacher> deleteTeacher(@PathVariable Long id) {
+    public ResponseEntity<TeacherDTO> deleteTeacher(@PathVariable Long id) {
         return teacherService.findTeacherById(id)
                 .map(teacher -> {
                     teacherService.deleteTeacher(id);
-                    return ResponseEntity.ok().<Teacher>build();
-                }).orElseGet(() -> ResponseEntity.notFound().build());
+                    return ResponseEntity.ok().<TeacherDTO>build();
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

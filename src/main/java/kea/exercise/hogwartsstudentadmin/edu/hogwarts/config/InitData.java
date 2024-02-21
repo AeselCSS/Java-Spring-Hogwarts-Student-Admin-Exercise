@@ -83,18 +83,18 @@ public class InitData implements ApplicationRunner {
         if (studentRepository.count() == 0) {
             List<Student> students = new ArrayList<>();
             // get houses from the database
-            students.add(new Student("Harry", "James", "Potter", LocalDate.of(1980, Month.JULY, 31), gryffindor, false, 1991, 1998, false));
-            students.add(new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, Month.SEPTEMBER, 19), gryffindor, false, 1991, 1998, false));
-            students.add(new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, Month.MARCH, 1), gryffindor, false, 1991, 1998, false));
-            students.add(new Student("Draco", "Lucius", "Malfoy", LocalDate.of(1980, Month.JUNE, 5), slytherin, false, 1991, 1998, false));
-            students.add(new Student("Pansy", "Parkinson", LocalDate.of(1980, Month.JULY, 4), slytherin, false, 1991, 1998, false));
-            students.add(new Student("Vincent", "Crabbe", LocalDate.of(1980, Month.JANUARY, 1), slytherin, false, 1991, 1998, false));
-            students.add(new Student("Padma", "Patil", LocalDate.of(1980, Month.APRIL, 1), ravenclaw, false, 1991, 1998, false));
-            students.add(new Student("Terry", "Boot", LocalDate.of(1980, Month.MAY, 1), ravenclaw, false, 1991, 1998, false));
-            students.add(new Student("Michael", "Corner", LocalDate.of(1980, Month.JUNE, 1), ravenclaw, false, 1991, 1998, false));
-            students.add(new Student("Justin", "Finch-Fletchley", LocalDate.of(1980, Month.JULY, 1), hufflepuff, false, 1991, 1998, false));
-            students.add(new Student("Hannah", "Abbott", LocalDate.of(1980, Month.AUGUST, 1), hufflepuff, false, 1991, 1998, false));
-            students.add(new Student("Susan", "Bones", LocalDate.of(1980, Month.SEPTEMBER, 1), hufflepuff, false, 1991, 1998, false));
+            students.add(new Student("Harry", "James", "Potter", LocalDate.of(1980, Month.JULY, 31), gryffindor, false, 1991, false, 1));
+            students.add(new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, Month.SEPTEMBER, 19), gryffindor, false, 1991, false, 1));
+            students.add(new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, Month.MARCH, 1), gryffindor, false, 1991, false, 1));
+            students.add(new Student("Draco", "Lucius", "Malfoy", LocalDate.of(1980, Month.JUNE, 5), slytherin, false, 1991, false, 1));
+            students.add(new Student("Pansy", "Parkinson", LocalDate.of(1980, Month.JULY, 4), slytherin, false, 1991, false, 1));
+            students.add(new Student("Vincent", "Crabbe", LocalDate.of(1980, Month.JANUARY, 1), slytherin, false, 1991, false, 1));
+            students.add(new Student("Padma", "Patil", LocalDate.of(1980, Month.APRIL, 1), ravenclaw, false, 1991, false, 1));
+            students.add(new Student("Terry", "Boot", LocalDate.of(1980, Month.MAY, 1), ravenclaw, false, 1991, false, 1));
+            students.add(new Student("Michael", "Corner", LocalDate.of(1980, Month.JUNE, 1), ravenclaw, false, 1991, false, 1));
+            students.add(new Student("Justin", "Finch-Fletchley", LocalDate.of(1980, Month.JULY, 1), hufflepuff, false, 1991, false, 1));
+            students.add(new Student("Hannah", "Abbott", LocalDate.of(1980, Month.AUGUST, 1), hufflepuff, false, 1991, false, 1));
+            students.add(new Student("Susan", "Bones", LocalDate.of(1980, Month.SEPTEMBER, 1), hufflepuff, false, 1991, false, 1));
 
             studentRepository.saveAll(students);
         }

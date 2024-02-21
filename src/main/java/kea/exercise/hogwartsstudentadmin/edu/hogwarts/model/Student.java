@@ -25,7 +25,10 @@ public class Student {
     @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
+
     @NotNull(message = "House is mandatory")
+    // define column name to be house instead of house_id or house_name in the student table
+    @JoinColumn(name = "house")
     private @ManyToOne(fetch = FetchType.EAGER) House house;
 
     @NotNull(message = "Prefect status is mandatory")
@@ -33,19 +36,21 @@ public class Student {
 
     @NotNull(message = "Enrollment year is mandatory")
     @Min(value = 1900, message = "Enrollment year must be after 1900")
-    private int enrollmentYear;
+    private Integer enrollmentYear;
 
-    @NotNull(message = "Graduation year is mandatory")
-    @Min(value = 1900, message = "Graduation year must be after 1900")
-    private int graduationYear;
+    private Integer graduationYear;
 
     @NotNull(message = "Graduated status is mandatory")
     private boolean isGraduated;
 
+    @Min(value = 1, message = "School year must be at least 1")
+    @Max(value = 7, message = "School year must be at most 7")
+    private Integer schoolYear;
+
     public Student() {
     }
 
-    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean isPrefect, int enrollmentYear, int graduationYear, boolean isGraduated) {
+    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean isPrefect, int enrollmentYear, boolean isGraduated, int schoolYear) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -53,12 +58,12 @@ public class Student {
         this.house = house;
         this.isPrefect = isPrefect;
         this.enrollmentYear = enrollmentYear;
-        this.graduationYear = graduationYear;
         this.isGraduated = isGraduated;
+        this.schoolYear = schoolYear;
     }
 
-    public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, boolean isPrefect, int enrollmentYear, int graduationYear, boolean isGraduated) {
-        this(firstName, null, lastName, dateOfBirth, house, isPrefect, enrollmentYear, graduationYear, isGraduated);
+    public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, boolean isPrefect, int enrollmentYear, boolean isGraduated, int schoolYear) {
+        this(firstName, null, lastName, dateOfBirth, house, isPrefect, enrollmentYear, isGraduated, schoolYear);
     }
 
     public Long getId() {
@@ -141,6 +146,14 @@ public class Student {
         isGraduated = graduated;
     }
 
+    public int getSchoolYear() {
+        return schoolYear;
+    }
+
+    public void setSchoolYear(int schoolYear) {
+        this.schoolYear = schoolYear;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -154,6 +167,7 @@ public class Student {
                 ", enrollmentYear=" + enrollmentYear +
                 ", graduationYear=" + graduationYear +
                 ", isGraduated=" + isGraduated +
+                ", schoolYear=" + schoolYear +
                 '}';
     }
 }

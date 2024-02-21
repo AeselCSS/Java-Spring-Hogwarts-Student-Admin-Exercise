@@ -22,6 +22,7 @@ public class Teacher {
     private LocalDate dateOfBirth;
 
     @NotNull(message = "House is mandatory")
+    @JoinColumn(name = "house")
     private @ManyToOne(fetch = FetchType.EAGER) House house;
 
     @NotNull(message = "Head of house status is mandatory")

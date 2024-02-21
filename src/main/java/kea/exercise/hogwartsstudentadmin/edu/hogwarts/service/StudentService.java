@@ -1,5 +1,6 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.StudentDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 
 import java.util.List;
@@ -12,5 +13,8 @@ public interface StudentService {
     Student updateStudent(Student student, Student updatedStudent);
     Student updateStudentPartially(Student student, Student updatedStudent);
     void deleteStudent(Long id);
+    StudentDTO convertToDTO(Student student);
+    Student convertFromDTO(StudentDTO studentDTO);
 }
+
 

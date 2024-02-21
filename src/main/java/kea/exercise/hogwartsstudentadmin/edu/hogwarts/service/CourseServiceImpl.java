@@ -7,7 +7,6 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.CourseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.StudentRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,12 +16,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImpl implements CourseService{
-    @Autowired
-    private CourseRepository courseRepository;
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private TeacherRepository teacherRepository;
+    private final CourseRepository courseRepository;
+    private final StudentRepository studentRepository;
+    private final TeacherRepository teacherRepository;
+
+    public CourseServiceImpl(CourseRepository courseRepository, StudentRepository studentRepository, TeacherRepository teacherRepository) {
+        this.courseRepository = courseRepository;
+        this.studentRepository = studentRepository;
+        this.teacherRepository = teacherRepository;
+    }
 
     @Override
     public List<Course> findAllCourses() {

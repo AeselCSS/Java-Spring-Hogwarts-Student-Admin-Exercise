@@ -4,7 +4,6 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.CourseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +14,11 @@ import java.util.stream.Collectors;
 @RestController
 public class CourseController {
 
-    @Autowired
-    private CourseService courseService;
+    private final CourseService courseService;
+
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @GetMapping("/courses")
     public List<Course> getAllCourses() {

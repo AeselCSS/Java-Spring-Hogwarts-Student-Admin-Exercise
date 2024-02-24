@@ -48,6 +48,15 @@ public class GlobalExceptionHandler {
         errors.put("error", exception.getMessage());
         return errors;
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public Map<String, String> handleIllegalArgumentExceptions(IllegalArgumentException exception) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", exception.getMessage());
+        return errors;
+    }
 }
 
 

@@ -389,3 +389,4 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/java,visualstudiocode,intellij+all,netbeans,node,maven,macos,windows,gradle
 /HELP.md
+/src/main/java/kea/exercise/hogwartsstudentadmin/edu/hogwarts/temporary/

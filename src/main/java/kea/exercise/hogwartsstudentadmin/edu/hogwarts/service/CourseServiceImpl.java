@@ -3,6 +3,7 @@ package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.*;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.EntityNotFoundException;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.ResourceNotFoundException;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.SchoolYearMismatchException;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
@@ -262,13 +263,17 @@ public class CourseServiceImpl implements CourseService {
      */
     @Override
     public CourseResponseDTO toDTO(Course course) {
-        return new CourseResponseDTO(
-                course.getId(),
-                course.getSubject(),
-                course.getSchoolYear(),
-                course.isCurrent(),
-                teacherService.toDTO(course.getTeacher()),
-                course.getStudents().stream().map(studentService::toDTO).toList());
+        Long id = course.getId();
+        String subject = course.getSubject();
+        Integer schoolYear = course.getSchoolYear();
+        boolean isCurrent = course.isCurrent();
+        TeacherResponseDTO teacher = null;
+        if (course.getTeacher() != null) {
+            teacher = teacherService.toDTO(course.getTeacher());
+        }
+        List<StudentResponseDTO> students = course.getStudents().stream().map(studentService::toDTO).toList();
+
+        return new CourseResponseDTO(id, subject, schoolYear, isCurrent, teacher, students);
     }
 
     /**
@@ -333,12 +338,15 @@ public class CourseServiceImpl implements CourseService {
      *
      * @param courseSchoolYear the school year of the course
      * @param students         the students to check
-     * @throws IllegalArgumentException if a student is not in the same school year as the course
+     * @throws SchoolYearMismatchException if a student is not in the same school year as the course
      */
+    //TODO: refactor to collect all students with mismatched school year and throw exception with all students
+    // that do not match the course school year instead of throwing exception for the first mismatched student.
+    // This may require changes to the exception class to accept a list of students.
     private void checkStudentSchoolYear(Integer courseSchoolYear, List<Student> students) {
         for (Student student : students) {
             if (!Objects.equals(student.getSchoolYear(), courseSchoolYear)) {
-                throw new IllegalArgumentException("Student " + toFullName(student.getFirstName(), student.getMiddleName(), student.getLastName()) + " is in school year " + student.getSchoolYear() + " and cannot be added to a course in school year " + courseSchoolYear);
+                throw new SchoolYearMismatchException("Student " + toFullName(student.getFirstName(), student.getMiddleName(), student.getLastName()) + " is in school year " + student.getSchoolYear() + " and cannot be added to a course in school year " + courseSchoolYear);
             }
         }
     }

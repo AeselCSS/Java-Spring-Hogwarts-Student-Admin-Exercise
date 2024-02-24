@@ -12,4 +12,37 @@ public class StringUtility {
         return sb.toString().trim();
     }
 
+    public static String[] fullNameAsFirstMiddleLast(String fullName) {
+        int firstSpace = fullName.indexOf(" ");
+        int lastSpace = fullName.lastIndexOf(" ");
+
+        // format fullname with toTitleCase
+        fullName = toTitleCase(fullName);
+
+        String firstName = fullName.substring(0, firstSpace);
+        String middleName = null;
+        if (firstSpace != lastSpace) {
+            middleName = fullName.substring(firstSpace + 1, lastSpace);
+        }
+        String lastName = fullName.substring(lastSpace + 1);
+
+        return new String[] {firstName, middleName, lastName};
+    }
+
+    public static String firstMiddleLastToFullName(String firstName, String middleName, String lastName) {
+        StringBuilder fullName = new StringBuilder();
+        if (firstName != null) {
+            fullName.append(toTitleCase(firstName));
+        }
+        if (middleName != null) {
+            if (!fullName.isEmpty()) fullName.append(" ");
+            fullName.append(toTitleCase(middleName));
+        }
+        if (lastName != null) {
+            if (!fullName.isEmpty()) fullName.append(" ");
+            fullName.append(toTitleCase(lastName));
+        }
+        return fullName.toString();
+    }
+
 }

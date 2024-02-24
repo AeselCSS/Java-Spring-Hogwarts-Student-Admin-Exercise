@@ -1,12 +1,10 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.HouseDTO;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.HouseResponseDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.House;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.HouseName;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.HouseRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,25 +16,17 @@ public class HouseServiceImpl implements HouseService{
     }
 
     @Override
-    public List<HouseDTO> findAllHouses() {
-        List<House> houses =  houseRepository.findAll();
-        List<HouseDTO> houseDTOS = new ArrayList<>();
-        for (House house : houses) {
-            houseDTOS.add(convertToHouseDTO(house));
-        }
-        return houseDTOS;
+    public List<HouseResponseDTO> findAllHouses() {
+        return houseRepository.findAll().stream().map(this::toDTO).toList();
     }
 
     @Override
-    public HouseDTO findHouseByName(String name) {
-        House house =  houseRepository.findByName(HouseName.valueOf(name.toUpperCase().trim()));
-        return convertToHouseDTO(house);
+    public HouseResponseDTO findHouseByName(String name) {
+        return houseRepository.findById(name).map(this::toDTO).orElseThrow(); // TODO handle throw
     }
 
     @Override
-    public HouseDTO convertToHouseDTO(House house) {
-        return new HouseDTO(house.getName(), house.getFounder(), house.getColors());
+    public HouseResponseDTO toDTO(House house) {
+        return new HouseResponseDTO(house.getName(), house.getFounder(), house.getColors());
     }
-
-
 }

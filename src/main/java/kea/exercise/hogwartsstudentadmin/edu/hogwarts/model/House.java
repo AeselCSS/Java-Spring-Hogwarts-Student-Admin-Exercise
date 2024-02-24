@@ -1,20 +1,15 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.model;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.validator.MaxListSize;
-
-import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.*;
 
 import java.util.List;
 
 @Entity
 public class House {
     @Id
-    private @Enumerated(EnumType.STRING) HouseName name;
+    private String name;
     private String founder;
-
     @ElementCollection
     @MaxListSize(value = 2, message = "You can only have up to 2 colors")
     private List<String> colors;
@@ -23,21 +18,17 @@ public class House {
     public House() {
     }
 
-    public House(HouseName name, String founder, List<String> colors) {
+    public House(String name, String founder, List<String> colors) {
         this.name = name;
         this.founder = founder;
         this.colors = colors;
     }
 
-    public HouseName getName() {
+    public String getName() {
         return name;
     }
 
-    public String getHouseName() {
-        return toTitleCase(name.toString());
-    }
-
-    public void setName(HouseName name) {
+    public void setName(String name) {
         this.name = name;
     }
 

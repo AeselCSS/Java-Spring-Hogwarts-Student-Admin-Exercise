@@ -1,9 +1,10 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.*;
 
 @Entity
 public class Student {
@@ -11,46 +12,22 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "First name is mandatory")
-    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     private String firstName;
-
-    @Size(max = 75, message = "Middle name must be less than 50 characters")
     private String middleName;
-
-    @NotBlank(message = "Last name is mandatory")
-    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
-
-    @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
-
-
-    @NotNull(message = "House is mandatory")
-    // define column name to be house instead of house_id or house_name in the student table
     @JoinColumn(name = "house")
     private @ManyToOne(fetch = FetchType.EAGER) House house;
-
-    @NotNull(message = "Prefect status is mandatory")
     private boolean isPrefect;
-
-    @NotNull(message = "Enrollment year is mandatory")
-    @Min(value = 1900, message = "Enrollment year must be after 1900")
     private Integer enrollmentYear;
-
     private Integer graduationYear;
-
-    @NotNull(message = "Graduated status is mandatory")
-    private boolean isGraduated;
-
-    @Min(value = 1, message = "School year must be at least 1")
-    @Max(value = 7, message = "School year must be at most 7")
+    private boolean isGraduated = false;
     private Integer schoolYear;
 
     public Student() {
     }
 
-    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean isPrefect, int enrollmentYear, boolean isGraduated, int schoolYear) {
+    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Integer graduationYear, Boolean isGraduated, Integer schoolYear) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -58,12 +35,27 @@ public class Student {
         this.house = house;
         this.isPrefect = isPrefect;
         this.enrollmentYear = enrollmentYear;
+        this.graduationYear = graduationYear;
         this.isGraduated = isGraduated;
         this.schoolYear = schoolYear;
     }
 
-    public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, boolean isPrefect, int enrollmentYear, boolean isGraduated, int schoolYear) {
-        this(firstName, null, lastName, dateOfBirth, house, isPrefect, enrollmentYear, isGraduated, schoolYear);
+    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Boolean isGraduated,  Integer schoolYear) {
+       this(firstName, middleName, lastName, dateOfBirth, house, isPrefect, enrollmentYear, null, isGraduated, schoolYear);
+    }
+
+    public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Boolean isGraduated,  Integer schoolYear) {
+        this(firstName, null, lastName, dateOfBirth, house, isPrefect, enrollmentYear, null, isGraduated,  schoolYear);
+    }
+
+    public Student(String fullName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Boolean isGraduated, Integer schoolYear) {
+        setName(fullName);
+        this.dateOfBirth = dateOfBirth;
+        this.house = house;
+        this.isPrefect = isPrefect;
+        this.enrollmentYear = enrollmentYear;
+        this.isGraduated = isGraduated;
+        this.schoolYear = schoolYear;
     }
 
     public Long getId() {
@@ -122,36 +114,53 @@ public class Student {
         isPrefect = prefect;
     }
 
-    public int getEnrollmentYear() {
+    public Integer getEnrollmentYear() {
         return enrollmentYear;
     }
 
-    public void setEnrollmentYear(int enrollmentYear) {
+    public void setEnrollmentYear(Integer enrollmentYear) {
         this.enrollmentYear = enrollmentYear;
     }
 
-    public int getGraduationYear() {
+    public Integer getGraduationYear() {
         return graduationYear;
     }
 
-    public void setGraduationYear(int graduationYear) {
+    public void setGraduationYear(Integer graduationYear) {
         this.graduationYear = graduationYear;
+        // if graduation year is set, update isGraduated to true.
+        this.isGraduated = graduationYear != null;
     }
 
-    public boolean isGraduated() {
+    public Boolean isGraduated() {
         return isGraduated;
     }
 
-    public void setGraduated(boolean graduated) {
+    public Boolean getGraduated() {
+        return isGraduated;
+    }
+
+    public void setGraduated(Boolean graduated) {
         isGraduated = graduated;
     }
 
-    public int getSchoolYear() {
+    public Integer getSchoolYear() {
         return schoolYear;
     }
 
-    public void setSchoolYear(int schoolYear) {
+    public void setSchoolYear(Integer schoolYear) {
         this.schoolYear = schoolYear;
+    }
+
+    public String getName() {
+        return firstMiddleLastToFullName(firstName, middleName, lastName);
+    }
+
+    public void setName(String fullName) {
+        String[] nameParts = fullNameAsFirstMiddleLast(fullName);
+        this.firstName = nameParts[0];
+        this.middleName = nameParts[1];
+        this.lastName = nameParts[2];
     }
 
     @Override
@@ -171,3 +180,6 @@ public class Student {
                 '}';
     }
 }
+
+
+

@@ -18,7 +18,7 @@ public record TeacherRequestDTO(
         LocalDate employmentEnd
 ) { public TeacherRequestDTO {
     if (name != null) {
-        String[] names = fullNameAsFirstMiddleLast(name);
+        String[] names = toNameParts(name);
         firstName = names[0];
         middleName = names[1];
         lastName = names[2];

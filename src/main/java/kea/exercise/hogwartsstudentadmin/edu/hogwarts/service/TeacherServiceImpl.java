@@ -64,7 +64,7 @@ public class TeacherServiceImpl implements TeacherService{
         Optional<Teacher> teacherOptional = teacherRepository.findById(id);
         teacherOptional.ifPresent(teacher -> {
             if(updatedTeacher.name() != null) {
-                String[] names = fullNameAsFirstMiddleLast(updatedTeacher.name());
+                String[] names = toNameParts(updatedTeacher.name());
                 teacher.setFirstName(names[0]);
                 teacher.setMiddleName(names[1]);
                 teacher.setLastName(names[2]);
@@ -96,7 +96,7 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     public TeacherResponseDTO toDTO(Teacher teacher) {
         logger.info("Converting teacher to DTO: {}", teacher);
-        String name = firstMiddleLastToFullName(teacher.getFirstName(), teacher.getMiddleName(), teacher.getLastName());
+        String name = toFullName(teacher.getFirstName(), teacher.getMiddleName(), teacher.getLastName());
         LocalDate dateOfbirth = teacher.getDateOfBirth();
         String house = teacher.getHouse().getName();
         Boolean isHeadOfHouse = teacher.isHeadOfHouse();
@@ -110,7 +110,7 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     public Teacher toEntity(TeacherRequestDTO teacherDTO) {
         logger.info("Converting teacher DTO to entity: {}", teacherDTO);
-        String[] names = fullNameAsFirstMiddleLast(teacherDTO.name());
+        String[] names = toNameParts(teacherDTO.name());
         String firstName = names[0];
         String middleName = names[1];
         String lastName = names[2];

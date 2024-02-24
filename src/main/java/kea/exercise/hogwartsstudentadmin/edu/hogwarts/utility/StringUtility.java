@@ -12,7 +12,7 @@ public class StringUtility {
         return sb.toString().trim();
     }
 
-    public static String[] fullNameAsFirstMiddleLast(String fullName) {
+    public static String[] toNameParts(String fullName) {
         int firstSpace = fullName.indexOf(" ");
         int lastSpace = fullName.lastIndexOf(" ");
 
@@ -29,7 +29,7 @@ public class StringUtility {
         return new String[] {firstName, middleName, lastName};
     }
 
-    public static String firstMiddleLastToFullName(String firstName, String middleName, String lastName) {
+    public static String toFullName(String firstName, String middleName, String lastName) {
         StringBuilder fullName = new StringBuilder();
         if (firstName != null) {
             fullName.append(toTitleCase(firstName));

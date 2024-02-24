@@ -17,8 +17,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.firstMiddleLastToFullName;
-import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.fullNameAsFirstMiddleLast;
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.toFullName;
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.toNameParts;
 
 
 @Service
@@ -68,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
         // if the student is present, copy the non-null properties from the updatedStudent to the student and save the student
         studentOptional.ifPresent(student -> {
             if(updatedStudent.name() != null) {
-                String[] names = fullNameAsFirstMiddleLast(updatedStudent.name());
+                String[] names = toNameParts(updatedStudent.name());
                 student.setFirstName(names[0]);
                 student.setMiddleName(names[1]);
                 student.setLastName(names[2]);
@@ -102,7 +102,7 @@ public class StudentServiceImpl implements StudentService {
         logger.info("Converting student to DTO: {}", student);
         String name = null;
         if (student.getName() != null) {
-            name = firstMiddleLastToFullName(student.getFirstName(), student.getMiddleName(), student.getLastName());
+            name = toFullName(student.getFirstName(), student.getMiddleName(), student.getLastName());
         }
         LocalDate dateOfBirth = student.getDateOfBirth();
         String house = student.getHouse().getName();
@@ -118,7 +118,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student toEntity(StudentRequestDTO studentDTO) {
         logger.info("Converting student DTO to entity: {}", studentDTO);
-        String[] names = fullNameAsFirstMiddleLast(studentDTO.name());
+        String[] names = toNameParts(studentDTO.name());
         String firstName = names[0];
         String middleName = names[1];
         String lastName = names[2];

@@ -153,11 +153,11 @@ public class Student {
     }
 
     public String getName() {
-        return firstMiddleLastToFullName(firstName, middleName, lastName);
+        return toFullName(firstName, middleName, lastName);
     }
 
     public void setName(String fullName) {
-        String[] nameParts = fullNameAsFirstMiddleLast(fullName);
+        String[] nameParts = toNameParts(fullName);
         this.firstName = nameParts[0];
         this.middleName = nameParts[1];
         this.lastName = nameParts[2];

@@ -3,6 +3,7 @@ package kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto;
 import java.time.LocalDate;
 
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.fullNameAsFirstMiddleLast;
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.toTitleCase;
 
 public record StudentRequestDTO(
         Long id,
@@ -25,8 +26,13 @@ public record StudentRequestDTO(
         middleName = names[1];
         lastName = names[2];
     }
-    if (house != null) {
 
+    if (house != null) {
+        house = toTitleCase(house);
     }
+
+    if (graduationYear != null) {
+        isGraduated = true;
     }
+}
 }

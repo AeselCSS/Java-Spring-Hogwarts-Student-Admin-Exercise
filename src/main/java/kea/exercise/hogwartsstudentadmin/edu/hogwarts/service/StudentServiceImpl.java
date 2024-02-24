@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.MiscUtility.copyNonNullProperties;
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.firstMiddleLastToFullName;
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.fullNameAsFirstMiddleLast;
 

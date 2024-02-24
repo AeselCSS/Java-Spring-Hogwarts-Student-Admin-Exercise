@@ -83,7 +83,7 @@ public class InitData implements ApplicationRunner {
         if (studentRepository.count() == 0) {
             List<Student> students = new ArrayList<>();
             // get houses from the database
-            students.add(new Student("Harry", "James", "Potter", LocalDate.of(1980, Month.JULY, 31), gryffindor, false, 1991, false, 1));
+            students.add(new Student("Harry James Potter", LocalDate.of(1980, Month.JULY, 31), gryffindor, false, 1991, false,  1));
             students.add(new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, Month.SEPTEMBER, 19), gryffindor, false, 1991, false, 1));
             students.add(new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, Month.MARCH, 1), gryffindor, false, 1991, false, 1));
             students.add(new Student("Draco", "Lucius", "Malfoy", LocalDate.of(1980, Month.JUNE, 5), slytherin, false, 1991, false, 1));
@@ -102,10 +102,10 @@ public class InitData implements ApplicationRunner {
 
     private void initHouses() {
         if (houseRepository.count() == 0) {
-            House gryffindor = new House(HouseName.GRYFFINDOR, "Godric Gryffindor", new ArrayList<>(Arrays.asList("Scarlet", "Gold")));
-            House hufflepuff = new House(HouseName.HUFFLEPUFF, "Helga Hufflepuff", new ArrayList<>(Arrays.asList("Yellow", "Black")));
-            House ravenclaw = new House(HouseName.RAVENCLAW, "Rowena Ravenclaw", new ArrayList<>(Arrays.asList("Blue", "Bronze")));
-            House slytherin = new House(HouseName.SLYTHERIN, "Salazar Slytherin", new ArrayList<>(Arrays.asList("Green", "Silver")));
+            House gryffindor = new House("Gryffindor", "Godric Gryffindor", new ArrayList<>(Arrays.asList("Scarlet", "Gold")));
+            House hufflepuff = new House("Hufflepuff", "Helga Hufflepuff", new ArrayList<>(Arrays.asList("Yellow", "Black")));
+            House ravenclaw = new House("Ravenclaw", "Rowena Ravenclaw", new ArrayList<>(Arrays.asList("Blue", "Bronze")));
+            House slytherin = new House("Slytherin", "Salazar Slytherin", new ArrayList<>(Arrays.asList("Green", "Silver")));
 
             this.gryffindor = gryffindor;
             this.hufflepuff = hufflepuff;

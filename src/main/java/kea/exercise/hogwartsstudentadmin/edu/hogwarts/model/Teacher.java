@@ -5,6 +5,9 @@ import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.firstMiddleLastToFullName;
+import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.fullNameAsFirstMiddleLast;
+
 @Entity
 public class Teacher {
     @Id
@@ -132,6 +135,17 @@ public class Teacher {
 
     public void setEmploymentEnd(LocalDate employmentEnd) {
         this.employmentEnd = employmentEnd;
+    }
+
+    public String getFullName() {
+        return firstMiddleLastToFullName(firstName, middleName, lastName);
+    }
+
+    public void setFullName(String fullName) {
+        String[] nameParts = fullNameAsFirstMiddleLast(fullName);
+        this.firstName = nameParts[0];
+        this.middleName = nameParts[1];
+        this.lastName = nameParts[2];
     }
 
     @Override

@@ -1,17 +1,24 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.TeacherDTO;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.TeacherRequestDTO;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.TeacherResponseDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface TeacherService {
-    List<Teacher> findAllTeachers();
-    Optional<Teacher> findTeacherById(Long id);
-    Teacher saveTeacher(Teacher teacher);
-    Teacher updateTeacher(Teacher teacher, Teacher updatedTeacher);
-    void deleteTeacher(Long id);
-    TeacherDTO convertToDTO(Teacher teacher);
-    Teacher convertFromDTO(TeacherDTO teacherDTO);
+    List<TeacherResponseDTO> findAllTeachers();
+    TeacherResponseDTO findTeacherById(Long id);
+    TeacherResponseDTO saveTeacher(TeacherRequestDTO teacher);
+    TeacherResponseDTO updateTeacher(TeacherRequestDTO updatedTeacher, Long id);
+
+    @Transactional
+    TeacherResponseDTO updateTeacherPartially(TeacherRequestDTO updatedTeacher, Long id);
+
+    TeacherResponseDTO deleteTeacher(Long id);
+    TeacherResponseDTO toDTO(Teacher teacher);
+    Teacher toEntity(TeacherRequestDTO teacherDTO);
 }
 

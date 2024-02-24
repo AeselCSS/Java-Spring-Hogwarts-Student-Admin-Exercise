@@ -43,16 +43,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public Map<String, String> handleResourceNotFoundHandler(ResourceNotFoundException exception) {
+    public Map<String, String> handleResourceNotFoundExceptions(ResourceNotFoundException exception) {
         Map<String, String> errors = new HashMap<>();
         errors.put("error", exception.getMessage());
         return errors;
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler(SchoolYearMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public Map<String, String> handleIllegalArgumentExceptions(IllegalArgumentException exception) {
+    public Map<String, String> handleSchoolYearMismatchExceptions(SchoolYearMismatchException exception) {
         Map<String, String> errors = new HashMap<>();
         errors.put("error", exception.getMessage());
         return errors;

@@ -1,6 +1,7 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.HouseResponseDTO;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.ResourceNotFoundException;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.House;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.HouseRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class HouseServiceImpl implements HouseService{
 
     @Override
     public HouseResponseDTO findHouseByName(String name) {
-        return houseRepository.findById(name).map(this::toDTO).orElseThrow(); // TODO handle throw
+        return houseRepository.findById(name).map(this::toDTO).orElseThrow(() -> new ResourceNotFoundException("House not found"));
     }
 
     @Override

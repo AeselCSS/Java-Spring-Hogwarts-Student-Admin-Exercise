@@ -3,6 +3,7 @@ package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.StudentRequestDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.StudentResponseDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.EntityNotFoundException;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.ResourceNotFoundException;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.House;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.HouseRepository;
@@ -123,7 +124,7 @@ public class StudentServiceImpl implements StudentService {
         String middleName = names[1];
         String lastName = names[2];
         LocalDate dateOfBirth = studentDTO.dateOfBirth();
-        House house = houseRepository.findById(studentDTO.house()).orElse(null); //TODO might need to handle this better
+        House house = houseRepository.findById(studentDTO.house()).orElseThrow(()-> new ResourceNotFoundException("House with name " + studentDTO.house() + " not found"));
         Boolean isPrefect = studentDTO.isPrefect();
         Integer enrollmentYear = studentDTO.enrollmentYear();
         Integer graduationYear = studentDTO.graduationYear();

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"kea.exercise.hogwartsstudentadmin.edu.hogwarts.service","l":"CourseServiceImpl"}];updateSearchResults();

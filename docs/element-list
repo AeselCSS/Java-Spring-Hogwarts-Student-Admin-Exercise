@@ -1,1 +1,10 @@
+kea.exercise.hogwartsstudentadmin
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.config
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.controller
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.model
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository
 kea.exercise.hogwartsstudentadmin.edu.hogwarts.service
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility
+kea.exercise.hogwartsstudentadmin.edu.hogwarts.validator

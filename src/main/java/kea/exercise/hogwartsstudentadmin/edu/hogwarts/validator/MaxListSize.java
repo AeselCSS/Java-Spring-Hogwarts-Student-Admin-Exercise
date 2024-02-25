@@ -8,9 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Annotation to validate the size of a list
- */
 // https://www.bezkoder.com/spring-boot-custom-validation/
 /**
  * The @Constraint annotation is used to define a custom constraint annotation.

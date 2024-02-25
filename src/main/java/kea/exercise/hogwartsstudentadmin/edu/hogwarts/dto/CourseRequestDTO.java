@@ -33,6 +33,20 @@ public record CourseRequestDTO(
         List<Long> studentIds,
         List<String> studentNames
 ) {
+    /**
+     * This constructor initializes a new instance of the CourseRequestDTO class.
+     * It takes a course id, subject, school year, current status, teacher id, teacher name, student ids, and student names as parameters.
+     * It sets the corresponding fields of the class to the values of the parameters.
+     * It also performs some data validation and transformation to ensure that the data is in the correct format.
+     * @param id The unique identifier for the course.
+     * @param subject The subject of the course. This is a String that represents the subject of the course.
+     * @param schoolYear The school year of the course. This is an Integer that represents the school year of the course.
+     * @param isCurrent The current status of the course. This is a Boolean that represents whether the course is current or not.
+     * @param teacherId The unique identifier for the teacher of the course.
+     * @param teacherName The name of the teacher of the course. This is a String that represents the name of the teacher of the course.
+     * @param studentIds The list of unique identifiers for the students in the course. This is a List of Long objects that contains the unique identifiers for the students in the course.
+     * @param studentNames The list of names for the students in the course. This is a List of String objects that contains the names for the students in the course.
+     */
     public CourseRequestDTO {
         if (subject != null) {
             subject = toTitleCase(subject);

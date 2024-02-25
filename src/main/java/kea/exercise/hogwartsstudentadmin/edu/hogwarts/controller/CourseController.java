@@ -150,6 +150,7 @@ public class CourseController {
      * This method handles the HTTP DELETE request for the /courses/{id}/teacher endpoint.
      * It removes the teacher from the course with the specified id.
      * @param id The id of the course to remove the teacher from.
+     * @param studentId The id of the teacher to remove from the course.
      * @return A CourseResponseDTO object.
      */
 

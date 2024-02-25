@@ -215,7 +215,7 @@ public class CourseServiceImpl implements CourseService {
                 Optional<Teacher> teacherOptional = teacherRepository.findById(courseData.teacherId());
                 teacherOptional.ifPresent(course::setTeacher);
             }
-            //
+            // check if students are in the same school year as the course
             if (courseData.studentIds() != null) {
                 List<Student> studentEntities = courseData.studentIds().stream().map(studentId -> studentRepository.findById(studentId).orElseThrow(() -> new EntityNotFoundException("Student", studentId))).toList();
                 if (courseData.schoolYear() != null) {

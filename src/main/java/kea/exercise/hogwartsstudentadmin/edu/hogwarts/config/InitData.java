@@ -28,7 +28,6 @@ public class InitData implements ApplicationRunner {
     private final TeacherRepository teacherRepository;
     private final HouseRepository houseRepository;
 
-
     House gryffindor;
     House hufflepuff;
     House ravenclaw;
@@ -37,12 +36,11 @@ public class InitData implements ApplicationRunner {
     /**
      * Constructor for the InitData class.
      * It initializes the repositories needed to interact with the database.
-     * @param courseRepository
-     * @param studentRepository
-     * @param teacherRepository
-     * @param houseRepository
+     * @param courseRepository The repository for the Course entity
+     * @param studentRepository The repository for the Student entity
+     * @param teacherRepository The repository for the Teacher entity
+     * @param houseRepository The repository for the House entity
      */
-
     public InitData(CourseRepository courseRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, HouseRepository houseRepository) {
         this.courseRepository = courseRepository;
         this.studentRepository = studentRepository;
@@ -54,7 +52,7 @@ public class InitData implements ApplicationRunner {
      * The run method is called when the application starts.
      * It is used to initialize the database with some data.
      * The data is added to the database if the database is empty.
-     * @param args
+     * @param args the arguments of the application
      */
     @Override
     public void run(ApplicationArguments args) {

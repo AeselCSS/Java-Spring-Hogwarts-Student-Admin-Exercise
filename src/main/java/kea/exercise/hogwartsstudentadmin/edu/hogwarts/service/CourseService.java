@@ -4,104 +4,107 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.*;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
 
 import java.util.List;
-/**
- * Interface for the CourseService class
-    * @see kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.CourseServiceImpl
- */
 
+/**
+ * This interface defines the contract for the CourseService.
+ * It provides methods for managing courses in the Hogwarts Student Admin system.
+ * The methods include operations for finding, saving, updating, and deleting courses,
+ * as well as operations for managing the relationship between courses and teachers/students.
+ */
 public interface CourseService {
+
     /**
-     * Method to find all courses
-     * @return a list of all courses
+     * Retrieves all courses.
+     * @return a list of all courses.
      */
     List<CourseResponseDTO> findAllCourses();
 
     /**
-     * Method to find a course by id
-     * @param id
-     * @return a course
+     * Retrieves a course by its id.
+     * @param id the id of the course to retrieve.
+     * @return the course with the given id.
      */
     CourseResponseDTO findCourseById(Long id);
 
     /**
-     * Method to find a teacher by course id
-     * @param courseId
-     * @return a teacher
+     * Retrieves the teacher of a course by the course's id.
+     * @param courseId the id of the course.
+     * @return the teacher of the course with the given id.
      */
     TeacherResponseDTO findTeacherByCourseId(Long courseId);
 
     /**
-     * Method to find all students by course id
-     * @param courseId
-     * @return a list of students
+     * Retrieves all students of a course by the course's id.
+     * @param courseId the id of the course.
+     * @return a list of students of the course with the given id.
      */
     List<StudentResponseDTO> findStudentsByCourseId(Long courseId);
 
     /**
-     * Method to save a course
-     * @param courseData
-     * @return a course
+     * Saves a new course.
+     * @param courseData the data of the course to save.
+     * @return the saved course.
      */
     CourseResponseDTO saveCourse(CourseRequestDTO courseData);
 
     /**
-     * Method to add a teacher to a course
-     * @param id
-     * @param teacher
-     * @return a course
+     * Adds a teacher to a course.
+     * @param id the id of the course.
+     * @param teacher the teacher to add to the course.
+     * @return the updated course.
      */
     CourseResponseDTO addTeacherToCourse(Long id, TeacherRequestDTO teacher);
 
     /**
-     * Method to add students to a course
-     * @param id
-     * @param students
-     * @return a course
+     * Adds students to a course.
+     * @param id the id of the course.
+     * @param students the students to add to the course.
+     * @return the updated course.
      */
     CourseResponseDTO addStudentsToCourse(Long id, List<StudentRequestDTO> students);
 
     /**
-     * Method to update a course
-     * @param id
-     * @param courseData
-     * @return a course
+     * Updates a course.
+     * @param id the id of the course to update.
+     * @param courseData the new data of the course.
+     * @return the updated course.
      */
     CourseResponseDTO updateCourse(Long id, CourseRequestDTO courseData);
 
     /**
-     * Method to update a course partially
-     * @param id
-     * @param courseData
-     * @return a course
+     * Partially updates a course.
+     * @param id the id of the course to update.
+     * @param courseData the new data of the course.
+     * @return the updated course.
      */
     CourseResponseDTO updateCoursePartially(Long id, CourseRequestDTO courseData);
 
     /**
-     * Method to delete a course
-     * @param id
-     * @return a course
+     * Deletes a course.
+     * @param id the id of the course to delete.
+     * @return the deleted course.
      */
     CourseResponseDTO deleteCourse(Long id);
 
     /**
-     * Method to delete a student from a course
-     * @param courseId
-     * @param studentId
-     * @return a course
+     * Deletes a student from a course.
+     * @param courseId the id of the course.
+     * @param studentId the id of the student to delete from the course.
+     * @return the updated course.
      */
     StudentResponseDTO deleteStudentFromCourse(Long courseId, Long studentId);
 
     /**
-     * Method to convert a course to a DTO
-     * @param course
-     * @return a course DTO
+     * Converts a Course entity to a CourseResponseDTO.
+     * @param course the Course entity to convert.
+     * @return the converted CourseResponseDTO.
      */
     CourseResponseDTO toDTO(Course course);
 
     /**
-     * Method to convert a course DTO to an entity
-     * @param courseDTO
-     * @return a course
+     * Converts a CourseRequestDTO to a Course entity.
+     * @param courseDTO the CourseRequestDTO to convert.
+     * @return the converted Course entity.
      */
     Course toEntity(CourseRequestDTO courseDTO);
 }

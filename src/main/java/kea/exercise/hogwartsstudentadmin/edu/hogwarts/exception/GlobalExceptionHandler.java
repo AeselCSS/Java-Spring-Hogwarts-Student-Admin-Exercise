@@ -11,14 +11,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Global exception handler
+ * This class is a global exception handler that handles all exceptions thrown across the application.
+ * It is annotated with @ControllerAdvice, which makes it applicable to all controllers in the application.
+ *
+ * @see org.springframework.web.bind.annotation.ControllerAdvice
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
+
     /**
-     * Handles validation exceptions
-     * @param exception the exception
-     * @return a map of errors
+     * This method handles validation exceptions thrown when method arguments are not valid.
+     * It is annotated with @ExceptionHandler, which means it is invoked when a MethodArgumentNotValidException is thrown.
+     * It returns a map of field names and their corresponding error messages.
+     *
+     * @param exception the exception that was thrown
+     * @return a map of field names and their corresponding error messages
+     * @see org.springframework.web.bind.MethodArgumentNotValidException
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -30,14 +38,17 @@ public class GlobalExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        // return the map of errors
         return errors;
     }
 
     /**
-     * Handles entity not found exceptions
-     * @param exception the exception
-     * @return a map of errors
+     * This method handles exceptions thrown when an entity is not found in the database.
+     * It is annotated with @ExceptionHandler, which means it is invoked when an EntityNotFoundException is thrown.
+     * It returns a map with a single entry, where the key is "error" and the value is the error message from the exception.
+     *
+     * @param exception the exception that was thrown
+     * @return a map with a single entry, where the key is "error" and the value is the error message from the exception
+     * @see EntityNotFoundException
      */
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -49,9 +60,13 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles resource not found exceptions
-     * @param exception the exception
-     * @return a map of errors
+     * This method handles exceptions thrown when a resource is not found.
+     * It is annotated with @ExceptionHandler, which means it is invoked when a ResourceNotFoundException is thrown.
+     * It returns a map with a single entry, where the key is "error" and the value is the error message from the exception.
+     *
+     * @param exception the exception that was thrown
+     * @return a map with a single entry, where the key is "error" and the value is the error message from the exception
+     * @see ResourceNotFoundException
      */
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -63,9 +78,13 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles school year mismatch exceptions
-     * @param exception the exception
-     * @return a map of errors
+     * This method handles exceptions thrown when there is a mismatch in the school year.
+     * It is annotated with @ExceptionHandler, which means it is invoked when a SchoolYearMismatchException is thrown.
+     * It returns a map with a single entry, where the key is "error" and the value is the error message from the exception.
+     *
+     * @param exception the exception that was thrown
+     * @return a map with a single entry, where the key is "error" and the value is the error message from the exception
+     * @see SchoolYearMismatchException
      */
     @ExceptionHandler(SchoolYearMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -76,5 +95,3 @@ public class GlobalExceptionHandler {
         return errors;
     }
 }
-
-

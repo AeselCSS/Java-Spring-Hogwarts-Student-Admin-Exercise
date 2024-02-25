@@ -13,7 +13,7 @@ public class ListSizeValidator implements ConstraintValidator<MaxListSize, List<
 
     /**
      * Method to initialize the constraint
-     * @param constraint
+     * @param constraint the constraint to initialize
      */
     @Override
     public void initialize(MaxListSize constraint) {
@@ -22,8 +22,8 @@ public class ListSizeValidator implements ConstraintValidator<MaxListSize, List<
 
     /**
      * Method to validate the constraint
-     * @param value
-     * @param context
+     * @param value the value to validate
+     * @param context the context to use
      * @return a boolean
      */
     @Override

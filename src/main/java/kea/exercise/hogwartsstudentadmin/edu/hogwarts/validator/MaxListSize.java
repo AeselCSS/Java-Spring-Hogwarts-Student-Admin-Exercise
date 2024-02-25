@@ -8,23 +8,43 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-// https://www.bezkoder.com/spring-boot-custom-validation/
 /**
- * The @Constraint annotation is used to define a custom constraint annotation.
- * The @Target annotation is used to specify where the annotation can be used.
- * The @Retention annotation is used to specify when the annotation will be available.
- * The @Constraint annotation is used to specify the validator class for the annotation.
+ * This annotation is used to validate the maximum size of a list.
+ * It is used in conjunction with the ListSizeValidator class.
+ *
+ * @see kea.exercise.hogwartsstudentadmin.edu.hogwarts.validator.ListSizeValidator
  */
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ListSizeValidator.class)
-
 public @interface MaxListSize {
+    /**
+     * The maximum size of the list.
+     *
+     * @return the maximum size
+     */
     int value();
+
+    /**
+     * The default error message if the list exceeds the maximum size.
+     *
+     * @return the error message
+     */
     String message() default "List exceeds maximum size";
+
+    /**
+     * The groups the constraint belongs to.
+     * This is a more advanced feature of validation constraints that allows for categorization.
+     *
+     * @return the groups
+     */
     Class<?>[] groups() default {};
+
+    /**
+     * The payload for the constraint.
+     * This is a more advanced feature of validation constraints that allows carrying additional information about the constraint violation.
+     *
+     * @return the payload
+     */
     Class<? extends Payload>[] payload() default {};
 }
-// NOTE: The groups() and payload() methods are more advanced features of validation constraints.
-// It allows categorization constraints and carry additional information about the constraint violation respectively.
-// By default, they are set to empty arrays.

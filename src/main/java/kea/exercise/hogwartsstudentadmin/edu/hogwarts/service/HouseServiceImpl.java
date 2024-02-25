@@ -17,7 +17,7 @@ public class HouseServiceImpl implements HouseService{
 
     /**
      * Constructor for the HouseService class
-     * @param houseRepository
+     * @param houseRepository The HouseRepository object that is used to handle the data access logic for the House model
      */
     public HouseServiceImpl(HouseRepository houseRepository) {
         this.houseRepository = houseRepository;
@@ -34,7 +34,7 @@ public class HouseServiceImpl implements HouseService{
 
     /**
      * Method to find a house by name
-     * @param name
+     * @param name the name of the house to find
      * @return a house
      */
     @Override
@@ -44,7 +44,7 @@ public class HouseServiceImpl implements HouseService{
 
     /**
      * Method to convert a house to a DTO
-     * @param house
+     * @param house the house to convert
      * @return a house DTO
      */
     @Override

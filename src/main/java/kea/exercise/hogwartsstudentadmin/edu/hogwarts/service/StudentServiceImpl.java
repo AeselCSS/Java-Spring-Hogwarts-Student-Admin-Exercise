@@ -35,9 +35,9 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Constructor for the StudentService class
-     * @param studentRepository
-     * @param houseRepository
-     * @param courseRepository
+     * @param studentRepository The StudentRepository object that is used to handle the data access logic for the Student model
+     * @param houseRepository The HouseRepository object that is used to handle the data access logic for the House model
+     * @param courseRepository The CourseRepository object that is used to handle the data access logic for the Course model
      */
     public StudentServiceImpl(StudentRepository studentRepository, HouseRepository houseRepository, CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to find a student by id
-     * @param id
+     * @param id the id of the student to find
      * @return a student
      */
     @Override
@@ -66,7 +66,7 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to save a student
-     * @param student
+     * @param student the student to save
      * @return a student
      */
     @Override
@@ -76,8 +76,8 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to update a student
-     * @param updatedStudent
-     * @param id
+     * @param updatedStudent the updated student information
+     * @param id the id of the student to update
      * @return a student
      */
     @Override
@@ -95,8 +95,8 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to update a student partially
-     * @param updatedStudent
-     * @param id
+     * @param updatedStudent the updated student information
+     * @param id the id of the student to update
      * @return a student
      */
     @Override
@@ -131,7 +131,7 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to delete a student
-     * @param id
+     * @param id the id of the student to delete
      * @return a student
      */
     @Override
@@ -147,7 +147,7 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to convert a student to a DTO
-     * @param student
+     * @param student the student to convert
      * @return a student DTO
      */
     @Override
@@ -170,7 +170,7 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * Method to convert a student DTO to an entity
-     * @param studentDTO
+     * @param studentDTO the student DTO to convert
      * @return a student
      */
     @Override

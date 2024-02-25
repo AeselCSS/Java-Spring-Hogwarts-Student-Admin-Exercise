@@ -6,7 +6,7 @@ package kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility;
 public class StringUtility {
     /**
      * Method to convert a string to title case
-     * @param input
+     * @param input the string to convert
      * @return a string in title case
      */
     public static String toTitleCase(String... input) {
@@ -22,7 +22,7 @@ public class StringUtility {
 
     /**
      * Method to split a full name into its parts
-     * @param fullName
+     * @param fullName the full name
      * @return an array of strings with the first name, middle name, and last name
      */
     public static String[] toNameParts(String fullName) {
@@ -44,9 +44,9 @@ public class StringUtility {
 
     /**
      * Method to convert a full name to a string
-     * @param firstName
-     * @param middleName
-     * @param lastName
+     * @param firstName the first name
+     * @param middleName the middle name
+     * @param lastName the last name
      * @return a full name
      */
     public static String toFullName(String firstName, String middleName, String lastName) {

@@ -33,9 +33,9 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Constructor for the TeacherService class
-     * @param teacherRepository
-     * @param houseRepository
-     * @param courseRepository
+     * @param teacherRepository The TeacherRepository object that is used to handle the data access logic for the Teacher model
+     * @param houseRepository The HouseRepository object that is used to handle the data access logic for the House model
+     * @param courseRepository The CourseRepository object that is used to handle the data access logic for the Course model
      */
     public TeacherServiceImpl(TeacherRepository teacherRepository, HouseRepository houseRepository, CourseRepository courseRepository) {
         this.teacherRepository = teacherRepository;
@@ -54,7 +54,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to find a teacher by id
-     * @param id
+     * @param id the id of the teacher to find
      * @return a teacher
      */
     @Override
@@ -64,7 +64,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to save a teacher
-     * @param teacher
+     * @param teacher the teacher to save
      * @return a teacher
      */
     @Override
@@ -74,8 +74,8 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to update a teacher
-     * @param updatedTeacher
-     * @param id
+     * @param updatedTeacher the updated teacher information
+     * @param id the id of the teacher to update
      * @return a teacher
      */
     @Override
@@ -91,8 +91,8 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to update a teacher partially
-     * @param updatedTeacher
-     * @param id
+     * @param updatedTeacher the updated teacher information
+     * @param id the id of the teacher to update
      * @return a teacher
      */
     @Override
@@ -123,7 +123,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to delete a teacher
-     * @param id
+     * @param id the id of the teacher to delete
      * @return a teacher
      */
     @Override
@@ -139,7 +139,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to convert a teacher to a DTO
-     * @param teacher
+     * @param teacher the teacher to convert
      * @return a teacher DTO
      */
     @Override
@@ -158,7 +158,7 @@ public class TeacherServiceImpl implements TeacherService{
 
     /**
      * Method to convert a teacher DTO to an entity
-     * @param teacherDTO
+     * @param teacherDTO the teacher DTO to convert
      * @return a teacher
      */
     @Override

@@ -11,8 +11,8 @@ import java.beans.PropertyDescriptor;
 public class MiscUtility {
     /**
      * Method to copy all non-null properties from the source object to the target object
-     * @param src
-     * @param target
+     * @param src the source object
+     * @param target the target object
      * Does not work properly, is not used at the moment, but could be useful in the future
      */
     public static void copyNonNullProperties(Object src, Object target) {

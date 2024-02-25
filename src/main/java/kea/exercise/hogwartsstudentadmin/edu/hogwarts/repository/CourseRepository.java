@@ -17,7 +17,7 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Long> {
     /**
      * Custom query to find course ids by student id
-     * @param studentId
+     * @param studentId The id of the student
      * @return List of course ids
      */
     @Query("SELECT c.id FROM Course c JOIN c.students s WHERE s.id = :studentId")
@@ -25,7 +25,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     /**
      * Custom query to find course ids by teacher id
-     * @param teacherId
+     * @param teacherId The id of the teacher
      * @return List of course ids
      */
     @Query("SELECT c.id FROM Course c WHERE c.teacher.id = :teacherId")
@@ -33,8 +33,8 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     /**
      * Custom query to delete a student from a course
-     * @param courseId
-     * @param studentId
+     * @param courseId The id of the course
+     * @param studentId The id of the student
      */
     @Modifying
     @Query(value = "DELETE FROM course_student cs WHERE cs.course_id = :courseId AND cs.student_id = :studentId", nativeQuery = true)
@@ -42,7 +42,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     /**
      * Custom query to delete a teacher from a course
-     * @param teacherId
+     * @param teacherId The id of the teacher
      */
     @Modifying
     @Query(value = "DELETE FROM Course c WHERE c.teacher.id = :teacherId", nativeQuery = true)

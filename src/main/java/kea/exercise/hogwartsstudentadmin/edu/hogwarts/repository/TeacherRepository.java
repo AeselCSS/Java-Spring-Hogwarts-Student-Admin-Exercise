@@ -8,16 +8,20 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 /**
- * TeacherRepository interface
- * This interface extends JpaRepository and is used to perform CRUD operations on the Teacher entity
- * It also contains a custom query to find a teacher by full name
+ * This interface extends JpaRepository and provides CRUD operations for the Teacher entity.
+ * It is a part of the repository layer of the application, which is responsible for data access.
+ * It also contains a custom query to find a teacher by their full name.
+ *
+ * @see org.springframework.data.jpa.repository.JpaRepository
  */
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     /**
-     * Custom query to find a teacher by full name
-     * @param fullName
-     * @return Optional of Teacher
+     * This method is a custom query that finds a teacher by their full name.
+     * It handles cases where the teacher has no middle name and where they do have a middle name.
+     *
+     * @param fullName the full name of the teacher to find
+     * @return an Optional containing the teacher if found, or an empty Optional if not found
      */
     @Query("SELECT t FROM Teacher t WHERE " +
             "(t.middleName IS NULL OR t.middleName = '') AND CONCAT(t.firstName, ' ', t.lastName) = :fullName " +

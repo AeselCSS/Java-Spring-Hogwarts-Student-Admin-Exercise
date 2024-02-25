@@ -32,6 +32,11 @@ public class Teacher {
      */
     @NotBlank(message = "First name is mandatory")
     private String firstName;
+
+    /**
+     * The middle name of the teacher.
+     * It is a string that represents the middle name of the teacher.
+     */
     private String middleName;
 
     /**
@@ -94,9 +99,24 @@ public class Teacher {
      */
     private LocalDate employmentEnd;
 
+    /**
+     * Default constructor for the Teacher class.
+     */
     public Teacher() {
     }
 
+    /**
+     * Constructor for the Teacher class with all fields.
+     * @param firstName The first name of the teacher.
+     * @param middleName The middle name of the teacher.
+     * @param lastName The last name of the teacher.
+     * @param dateOfBirth The date of birth of the teacher.
+     * @param house The house of the teacher.
+     * @param isHeadOfHouse The head of house status of the teacher.
+     * @param employment The employment status of the teacher.
+     * @param employmentStart The employment start date of the teacher.
+     * @param employmentEnd The employment end date of the teacher.
+     */
     public Teacher(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean isHeadOfHouse, EmpType employment, LocalDate employmentStart, LocalDate employmentEnd) {
         this.firstName = firstName;
         this.middleName = middleName;
@@ -109,94 +129,194 @@ public class Teacher {
         this.employmentEnd = employmentEnd;
     }
 
+    /**
+     * Constructor for the Teacher class with all fields except middleName.
+     * @param firstName The first name of the teacher.
+     * @param lastName The last name of the teacher.
+     * @param dateOfBirth The date of birth of the teacher.
+     * @param house The house of the teacher.
+     * @param isHeadOfHouse The head of house status of the teacher.
+     * @param employment The employment status of the teacher.
+     * @param employmentStart The employment start date of the teacher.
+     * @param employmentEnd The employment end date of the teacher.
+     */
     public Teacher(String firstName, String lastName, LocalDate dateOfBirth, House house, boolean isHeadOfHouse, EmpType employment, LocalDate employmentStart, LocalDate employmentEnd) {
         this(firstName, null, lastName, dateOfBirth, house, isHeadOfHouse, employment, employmentStart, employmentEnd);
     }
 
+    /**
+     * Getter for the id of the teacher.
+     * @return The id of the teacher.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Setter for the id of the teacher.
+     * @param id The new id of the teacher.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Getter for the first name of the teacher.
+     * @return The first name of the teacher.
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Setter for the first name of the teacher.
+     * @param firstName The new first name of the teacher.
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Getter for the middle name of the teacher.
+     * @return The middle name of the teacher.
+     */
     public String getMiddleName() {
         return middleName;
     }
 
+    /**
+     * Setter for the middle name of the teacher.
+     * @param middleName The new middle name of the teacher.
+     */
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
+    /**
+     * Getter for the last name of the teacher.
+     * @return The last name of the teacher.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Setter for the last name of the teacher.
+     * @param lastName The new last name of the teacher.
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Getter for the date of birth of the teacher.
+     * @return The date of birth of the teacher.
+     */
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
+    /**
+     * Setter for the date of birth of the teacher.
+     * @param dateOfBirth The new date of birth of the teacher.
+     */
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
+    /**
+     * Getter for the house of the teacher.
+     * @return The house of the teacher.
+     */
     public House getHouse() {
         return house;
     }
 
+    /**
+     * Setter for the house of the teacher.
+     * @param house The new house of the teacher.
+     */
     public void setHouse(House house) {
         this.house = house;
     }
 
+    /**
+     * Getter for the head of house status of the teacher.
+     * @return The head of house status of the teacher.
+     */
     public boolean isHeadOfHouse() {
         return isHeadOfHouse;
     }
 
+    /**
+     * Setter for the head of house status of the teacher.
+     * @param headOfHouse The new head of house status of the teacher.
+     */
     public void setHeadOfHouse(boolean headOfHouse) {
         isHeadOfHouse = headOfHouse;
     }
 
+    /**
+     * Getter for the employment status of the teacher.
+     * @return The employment status of the teacher.
+     */
     public EmpType getEmployment() {
         return employment;
     }
 
+    /**
+     * Setter for the employment status of the teacher.
+     * @param employment The new employment status of the teacher.
+     */
     public void setEmployment(EmpType employment) {
         this.employment = employment;
     }
 
+    /**
+     * Getter for the employment start date of the teacher.
+     * @return The employment start date of the teacher.
+     */
     public LocalDate getEmploymentStart() {
         return employmentStart;
     }
 
+    /**
+     * Setter for the employment start date of the teacher.
+     * @param employmentStart The new employment start date of the teacher.
+     */
     public void setEmploymentStart(LocalDate employmentStart) {
         this.employmentStart = employmentStart;
     }
 
+    /**
+     * Getter for the employment end date of the teacher.
+     * @return The employment end date of the teacher.
+     */
     public LocalDate getEmploymentEnd() {
         return employmentEnd;
     }
 
+    /**
+     * Setter for the employment end date of the teacher.
+     * @param employmentEnd The new employment end date of the teacher.
+     */
     public void setEmploymentEnd(LocalDate employmentEnd) {
         this.employmentEnd = employmentEnd;
     }
 
+    /**
+     * Getter for the full name of the teacher.
+     * @return The full name of the teacher.
+     */
     public String getFullName() {
         return toFullName(firstName, middleName, lastName);
     }
 
+    /**
+     * Setter for the full name of the teacher.
+     * Splits the full name into first name, middle name, and last name.
+     * @param fullName The new full name of the teacher.
+     */
     public void setFullName(String fullName) {
         String[] nameParts = toNameParts(fullName);
         this.firstName = nameParts[0];
@@ -204,6 +324,10 @@ public class Teacher {
         this.lastName = nameParts[2];
     }
 
+    /**
+     * Returns a string representation of the teacher.
+     * @return A string representation of the teacher.
+     */
     @Override
     public String toString() {
         return "Teacher{" +

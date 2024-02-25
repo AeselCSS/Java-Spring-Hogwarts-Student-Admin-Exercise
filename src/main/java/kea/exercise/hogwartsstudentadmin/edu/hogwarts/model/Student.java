@@ -83,15 +83,31 @@ public class Student {
      */
     private boolean isGraduated = false;
 
-/**
+     /**
      * The school year of the student.
      * It is an integer that represents the school year of the student.
      */
     private Integer schoolYear;
 
+    /**
+     * Default constructor for the Student class.
+     */
     public Student() {
     }
 
+    /**
+     * Constructor for the Student class with all fields.
+     * @param firstName The first name of the student.
+     * @param middleName The middle name of the student.
+     * @param lastName The last name of the student.
+     * @param dateOfBirth The date of birth of the student.
+     * @param house The house of the student.
+     * @param isPrefect The prefect status of the student.
+     * @param enrollmentYear The enrollment year of the student.
+     * @param graduationYear The graduation year of the student.
+     * @param isGraduated The graduated status of the student.
+     * @param schoolYear The school year of the student.
+     */
     public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Integer graduationYear, Boolean isGraduated, Integer schoolYear) {
         this.firstName = firstName;
         this.middleName = middleName;
@@ -105,14 +121,47 @@ public class Student {
         this.schoolYear = schoolYear;
     }
 
+    /**
+     * Constructor for the Student class with all fields except graduationYear.
+     * @param firstName The first name of the student.
+     * @param middleName The middle name of the student.
+     * @param lastName The last name of the student.
+     * @param dateOfBirth The date of birth of the student.
+     * @param house The house of the student.
+     * @param isPrefect The prefect status of the student.
+     * @param enrollmentYear The enrollment year of the student.
+     * @param isGraduated The graduated status of the student.
+     * @param schoolYear The school year of the student.
+     */
     public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Boolean isGraduated,  Integer schoolYear) {
        this(firstName, middleName, lastName, dateOfBirth, house, isPrefect, enrollmentYear, null, isGraduated, schoolYear);
     }
 
+    /**
+     * Constructor for the Student class with all fields except middleName and graduationYear.
+     * @param firstName The first name of the student.
+     * @param lastName The last name of the student.
+     * @param dateOfBirth The date of birth of the student.
+     * @param house The house of the student.
+     * @param isPrefect The prefect status of the student.
+     * @param enrollmentYear The enrollment year of the student.
+     * @param isGraduated The graduated status of the student.
+     * @param schoolYear The school year of the student.
+     */
     public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Boolean isGraduated,  Integer schoolYear) {
         this(firstName, null, lastName, dateOfBirth, house, isPrefect, enrollmentYear, null, isGraduated,  schoolYear);
     }
 
+    /**
+     * Constructor for the Student class with all fields except middleName, lastName and graduationYear.
+     * @param fullName The full name of the student.
+     * @param dateOfBirth The date of birth of the student.
+     * @param house The house of the student.
+     * @param isPrefect The prefect status of the student.
+     * @param enrollmentYear The enrollment year of the student.
+     * @param isGraduated The graduated status of the student.
+     * @param schoolYear The school year of the student.
+     */
     public Student(String fullName, LocalDate dateOfBirth, House house, Boolean isPrefect, Integer enrollmentYear, Boolean isGraduated, Integer schoolYear) {
         setName(fullName);
         this.dateOfBirth = dateOfBirth;
@@ -123,104 +172,206 @@ public class Student {
         this.schoolYear = schoolYear;
     }
 
+    /**
+     * Getter for the id of the student.
+     * @return The id of the student.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Setter for the id of the student.
+     * @param id The new id of the student.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Getter for the first name of the student.
+     * @return The first name of the student.
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Setter for the first name of the student.
+     * @param firstName The new first name of the student.
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Getter for the middle name of the student.
+     * @return The middle name of the student.
+     */
     public String getMiddleName() {
         return middleName;
     }
 
+    /**
+     * Setter for the middle name of the student.
+     * @param middleName The new middle name of the student.
+     */
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
 
+    /**
+     * Getter for the last name of the student.
+     * @return The last name of the student.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Setter for the last name of the student.
+     * @param lastName The new last name of the student.
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Getter for the date of birth of the student.
+     * @return The date of birth of the student.
+     */
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
+    /**
+     * Setter for the date of birth of the student.
+     * @param dateOfBirth The new date of birth of the student.
+     */
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
+    /**
+     * Getter for the house of the student.
+     * @return The house of the student.
+     */
     public House getHouse() {
         return house;
     }
 
+    /**
+     * Setter for the house of the student.
+     * @param house The new house of the student.
+     */
     public void setHouse(House house) {
         this.house = house;
     }
 
+    /**
+     * Getter for the prefect status of the student.
+     * @return The prefect status of the student.
+     */
     public boolean isPrefect() {
         return isPrefect;
     }
 
+    /**
+     * Setter for the prefect status of the student.
+     * @param prefect The new prefect status of the student.
+     */
     public void setPrefect(boolean prefect) {
         isPrefect = prefect;
     }
 
+    /**
+     * Getter for the enrollment year of the student.
+     * @return The enrollment year of the student.
+     */
     public Integer getEnrollmentYear() {
         return enrollmentYear;
     }
 
+    /**
+     * Setter for the enrollment year of the student.
+     * @param enrollmentYear The new enrollment year of the student.
+     */
     public void setEnrollmentYear(Integer enrollmentYear) {
         this.enrollmentYear = enrollmentYear;
     }
 
+    /**
+     * Getter for the graduation year of the student.
+     * @return The graduation year of the student.
+     */
     public Integer getGraduationYear() {
         return graduationYear;
     }
 
+    /**
+     * Setter for the graduation year of the student.
+     * Also updates the graduated status of the student to true if a graduation year is set.
+     * @param graduationYear The new graduation year of the student.
+     */
     public void setGraduationYear(Integer graduationYear) {
         this.graduationYear = graduationYear;
         // if graduation year is set, update isGraduated to true.
         this.isGraduated = graduationYear != null;
     }
 
+    /**
+     * Getter for the graduated status of the student.
+     * @return The graduated status of the student.
+     */
     public Boolean isGraduated() {
         return isGraduated;
     }
 
+    /**
+     * Getter for the graduated status of the student.
+     * @return The graduated status of the student.
+     */
     public Boolean getGraduated() {
         return isGraduated;
     }
 
+    /**
+     * Setter for the graduated status of the student.
+     * @param graduated The new graduated status of the student.
+     */
     public void setGraduated(Boolean graduated) {
         isGraduated = graduated;
     }
 
+    /**
+     * Getter for the school year of the student.
+     * @return The school year of the student.
+     */
     public Integer getSchoolYear() {
         return schoolYear;
     }
 
+    /**
+     * Setter for the school year of the student.
+     * @param schoolYear The new school year of the student.
+     */
     public void setSchoolYear(Integer schoolYear) {
         this.schoolYear = schoolYear;
     }
 
+    /**
+     * Getter for the full name of the student.
+     * @return The full name of the student.
+     */
     public String getName() {
         return toFullName(firstName, middleName, lastName);
     }
 
+    /**
+     * Setter for the full name of the student.
+     * Splits the full name into first name, middle name, and last name.
+     * @param fullName The new full name of the student.
+     */
     public void setName(String fullName) {
         String[] nameParts = toNameParts(fullName);
         this.firstName = nameParts[0];
@@ -228,6 +379,10 @@ public class Student {
         this.lastName = nameParts[2];
     }
 
+    /**
+     * Returns a string representation of the student.
+     * @return A string representation of the student.
+     */
     @Override
     public String toString() {
         return "Student{" +
@@ -245,6 +400,3 @@ public class Student {
                 '}';
     }
 }
-
-
-

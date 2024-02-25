@@ -49,7 +49,7 @@ public class StudentController {
     /**
      * This method handles the HTTP POST request for the /students endpoint.
      * It creates a new student in the database.
-     * @param studentDTO
+     * @param studentDTO The StudentRequestDTO object that contains the data for the new student.
      * @return A StudentResponseDTO object.
      */
     @PostMapping("/students")
@@ -59,8 +59,8 @@ public class StudentController {
 
     /**
      * This method handles the HTTP PUT request for the /students/{id} endpoint.
-     * @param id
-     * @param studentDTO
+     * @param id The id of the student to update.
+     * @param studentDTO The StudentRequestDTO object that contains the updated data for the student.
      * @return A StudentResponseDTO object.
      */
     @PutMapping("/students/{id}")
@@ -70,8 +70,8 @@ public class StudentController {
 
     /**
      * This method handles the HTTP PATCH request for the /students/{id} endpoint.
-     * @param id
-     * @param studentDTO
+     * @param id The id of the student to update.
+     * @param studentDTO The StudentRequestDTO object that contains the updated data for the student.
      * @return A StudentResponseDTO object.
      */
     @PatchMapping("/students/{id}")

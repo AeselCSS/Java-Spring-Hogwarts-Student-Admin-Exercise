@@ -6,6 +6,21 @@ import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtili
 
 /**
  * Data Transfer Object for TeacherRequest
+ * <p>
+ *     This record is used to transfer data related to a teacher request.
+ *     It includes information about the teacher such as the teacher id, first name, middle name, last name, name, date of birth, house, head of house status, employment, employment start, and employment end.
+ *
+ *     @param id The unique identifier for the teacher.
+ *     @param firstName The first name of the teacher. This is a String that represents the first name of the teacher.
+ *     @param middleName The middle name of the teacher. This is a String that represents the middle name of the teacher.
+ *     @param lastName The last name of the teacher. This is a String that represents the last name of the teacher.
+ *     @param name The full name of the teacher. This is a String that represents the full name of the teacher.
+ *     @param dateOfBirth The date of birth of the teacher. This is a LocalDate object that represents the date of birth of the teacher.
+ *     @param house The house of the teacher. This is a String that represents the house of the teacher.
+ *     @param isHeadOfHouse The head of house status of the teacher. This is a Boolean that represents whether the teacher is a head of house or not.
+ *     @param employment The employment status of the teacher. This is a String that represents the employment status of the teacher.
+ *     @param employmentStart The employment start date of the teacher. This is a LocalDate object that represents the employment start date of the teacher.
+ *     @param employmentEnd The employment end date of the teacher. This is a LocalDate object that represents the employment end date of the teacher.
  */
 public record TeacherRequestDTO(
         Long id,
@@ -20,21 +35,6 @@ public record TeacherRequestDTO(
         LocalDate employmentStart,
         LocalDate employmentEnd
 ) {
-    /**
-     * Constructor for TeacherRequestDTO
-     * Capitalizes the house and sets the first, middle, and last name
-     * @param id
-     * @param firstName
-     * @param middleName
-     * @param lastName
-     * @param name
-     * @param dateOfBirth
-     * @param house
-     * @param isHeadOfHouse
-     * @param employment
-     * @param employmentStart
-     * @param employmentEnd
-     */
     public TeacherRequestDTO {
     if (name != null) {
         String[] names = toNameParts(name);

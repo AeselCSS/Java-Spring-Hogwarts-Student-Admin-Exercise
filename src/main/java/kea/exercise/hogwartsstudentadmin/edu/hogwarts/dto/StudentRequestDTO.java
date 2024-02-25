@@ -7,6 +7,22 @@ import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtili
 
 /**
  * Data Transfer Object for StudentRequest
+ * <p>
+ *     This record is used to transfer data related to a student request.
+ *     It includes information about the student such as the student id, first name, middle name, last name, name, date of birth, house, prefect status, enrollment year, graduation year, graduation status, and school year.
+ *
+ *     @param id The unique identifier for the student.
+ *     @param firstName The first name of the student. This is a String that represents the first name of the student.
+ *     @param middleName The middle name of the student. This is a String that represents the middle name of the student.
+ *     @param lastName The last name of the student. This is a String that represents the last name of the student.
+ *     @param name The full name of the student. This is a String that represents the full name of the student.
+ *     @param dateOfBirth The date of birth of the student. This is a LocalDate object that represents the date of birth of the student.
+ *     @param house The house of the student. This is a String that represents the house of the student.
+ *     @param isPrefect The prefect status of the student. This is a Boolean that represents whether the student is a prefect or not.
+ *     @param enrollmentYear The enrollment year of the student. This is an Integer that represents the enrollment year of the student.
+ *     @param graduationYear The graduation year of the student. This is an Integer that represents the graduation year of the student.
+ *     @param isGraduated The graduation status of the student. This is a Boolean that represents whether the student has graduated or not.
+ *     @param schoolYear The school year of the student. This is an Integer that represents the school year of the student.
  */
 public record StudentRequestDTO(
         Long id,
@@ -23,22 +39,6 @@ public record StudentRequestDTO(
         Integer schoolYear
 
 ) {
-    /**
-     * Constructor for StudentRequestDTO
-     * Capitalizes the house and sets the first, middle, and last name
-     * @param id
-     * @param firstName
-     * @param middleName
-     * @param lastName
-     * @param name
-     * @param dateOfBirth
-     * @param house
-     * @param isPrefect
-     * @param enrollmentYear
-     * @param graduationYear
-     * @param isGraduated
-     * @param schoolYear
-     */
     public StudentRequestDTO {
     if (name != null) {
         String[] names = toNameParts(name);

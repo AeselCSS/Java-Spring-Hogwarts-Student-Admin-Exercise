@@ -2,11 +2,8 @@ package kea.exercise.hogwartsstudentadmin.edu.hogwarts.service;
 
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.*;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
+
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 /**
  * Interface for the CourseService class
     * @see kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.CourseServiceImpl

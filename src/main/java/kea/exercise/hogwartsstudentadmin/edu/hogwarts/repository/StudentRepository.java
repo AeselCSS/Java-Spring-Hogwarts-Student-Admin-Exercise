@@ -1,7 +1,6 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository;
 
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

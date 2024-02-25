@@ -1,9 +1,6 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-
 
 import java.util.List;
 

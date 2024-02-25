@@ -5,7 +5,6 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.StudentResponseDTO;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface for the StudentService class

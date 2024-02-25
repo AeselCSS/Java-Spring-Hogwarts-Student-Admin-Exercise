@@ -1,7 +1,7 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception;
 
 /**
- * Custom exception for when an school year mismatch occurs
+ * Custom exception for when a school year mismatch occurs
  */
 public class SchoolYearMismatchException extends RuntimeException{
     /**

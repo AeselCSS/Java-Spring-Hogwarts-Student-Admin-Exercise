@@ -1,16 +1,11 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.controller;
 
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.dto.*;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Course;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
-import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.CourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * The CourseController class is a REST controller that handles HTTP requests for the Course model.

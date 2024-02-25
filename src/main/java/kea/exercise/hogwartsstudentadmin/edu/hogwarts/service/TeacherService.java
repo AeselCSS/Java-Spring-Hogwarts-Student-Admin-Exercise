@@ -6,7 +6,6 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface for the TeacherService class

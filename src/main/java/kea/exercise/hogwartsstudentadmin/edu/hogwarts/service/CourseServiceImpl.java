@@ -10,11 +10,11 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.CourseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.StudentRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.TeacherRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;

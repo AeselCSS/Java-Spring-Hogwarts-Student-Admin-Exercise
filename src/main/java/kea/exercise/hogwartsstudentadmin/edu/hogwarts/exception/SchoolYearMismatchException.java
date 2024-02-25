@@ -1,13 +1,15 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+/**
+ * Custom exception for when an school year mismatch occurs
+ */
 public class SchoolYearMismatchException extends RuntimeException{
-    private static final Logger logger = LoggerFactory.getLogger(SchoolYearMismatchException.class);
+    /**
+     * Constructor
+     * @param message the message
+     */
     public SchoolYearMismatchException(String message) {
         super(message);
-        logger.info("IllegalArgumentException: " + message);
 
     }
 }

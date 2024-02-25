@@ -1,6 +1,14 @@
 package kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility;
 
+/**
+ * Utility class for string manipulation
+ */
 public class StringUtility {
+    /**
+     * Method to convert a string to title case
+     * @param input
+     * @return a string in title case
+     */
     public static String toTitleCase(String... input) {
         if (input == null || input.length == 0) {
             return "";
@@ -12,6 +20,11 @@ public class StringUtility {
         return sb.toString().trim();
     }
 
+    /**
+     * Method to split a full name into its parts
+     * @param fullName
+     * @return an array of strings with the first name, middle name, and last name
+     */
     public static String[] toNameParts(String fullName) {
         int firstSpace = fullName.indexOf(" ");
         int lastSpace = fullName.lastIndexOf(" ");
@@ -29,6 +42,13 @@ public class StringUtility {
         return new String[] {firstName, middleName, lastName};
     }
 
+    /**
+     * Method to convert a full name to a string
+     * @param firstName
+     * @param middleName
+     * @param lastName
+     * @return a full name
+     */
     public static String toFullName(String firstName, String middleName, String lastName) {
         StringBuilder fullName = new StringBuilder();
         if (firstName != null) {

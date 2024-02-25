@@ -15,6 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is used to initialize the database with some data.
+ * It implements the ApplicationRunner interface, which means that the run method will be called when the application starts.
+ * The run method is used to initialize the database with some data.
+ * The data is added to the database if the database is empty.
+ */
 @Component
 public class InitData implements ApplicationRunner {
     private final CourseRepository courseRepository;
@@ -28,6 +34,15 @@ public class InitData implements ApplicationRunner {
     House ravenclaw;
     House slytherin;
 
+    /**
+     * Constructor for the InitData class.
+     * It initializes the repositories needed to interact with the database.
+     * @param courseRepository
+     * @param studentRepository
+     * @param teacherRepository
+     * @param houseRepository
+     */
+
     public InitData(CourseRepository courseRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, HouseRepository houseRepository) {
         this.courseRepository = courseRepository;
         this.studentRepository = studentRepository;
@@ -35,7 +50,12 @@ public class InitData implements ApplicationRunner {
         this.houseRepository = houseRepository;
     }
 
-
+    /**
+     * The run method is called when the application starts.
+     * It is used to initialize the database with some data.
+     * The data is added to the database if the database is empty.
+     * @param args
+     */
     @Override
     public void run(ApplicationArguments args) {
         initHouses();
@@ -44,6 +64,10 @@ public class InitData implements ApplicationRunner {
         initCourses();
     }
 
+    /**
+     * The initCourses method is used to initialize the database with some courses.
+     * The courses are added to the database if the database is empty.
+     */
     private void initCourses() {
         if (courseRepository.count() == 0) {
             List<Teacher> teachers = teacherRepository.findAll();
@@ -60,6 +84,10 @@ public class InitData implements ApplicationRunner {
         }
     }
 
+    /**
+     * The initTeachers method is used to initialize the database with some teachers.
+     * The teachers are added to the database if the database is empty.
+     */
     private void initTeachers() {
         if (teacherRepository.count() == 0) {
             List<Teacher> teachers = new ArrayList<>();
@@ -79,6 +107,10 @@ public class InitData implements ApplicationRunner {
         }
     }
 
+    /**
+     * The initStudents method is used to initialize the database with some students.
+     * The students are added to the database if the database is empty.
+     */
     private void initStudents() {
         if (studentRepository.count() == 0) {
             List<Student> students = new ArrayList<>();
@@ -100,6 +132,10 @@ public class InitData implements ApplicationRunner {
         }
     }
 
+    /**
+     * The initHouses method is used to initialize the database with some houses.
+     * The houses are added to the database if the database is empty.
+     */
     private void initHouses() {
         if (houseRepository.count() == 0) {
             House gryffindor = new House("Gryffindor", "Godric Gryffindor", new ArrayList<>(Arrays.asList("Scarlet", "Gold")));

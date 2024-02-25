@@ -7,6 +7,10 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface for the StudentService class
+ * @see kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.StudentServiceImpl
+ */
 public interface StudentService {
     List<StudentResponseDTO> findAllStudents();
     StudentResponseDTO findStudentById(Long id);

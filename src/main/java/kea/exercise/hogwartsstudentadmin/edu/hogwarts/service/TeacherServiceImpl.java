@@ -6,6 +6,7 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.EntityNotFoundEx
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.EmpType;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.House;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Teacher;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.CourseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.HouseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.TeacherRepository;
 import org.slf4j.Logger;
@@ -20,33 +21,63 @@ import java.util.Optional;
 
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.*;
 
+/**
+ * Service class for the Teacher entity
+ */
 @Service
 public class TeacherServiceImpl implements TeacherService{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final TeacherRepository teacherRepository;
     private final HouseRepository houseRepository;
+    private final CourseRepository courseRepository;
 
-    public TeacherServiceImpl(TeacherRepository teacherRepository, HouseRepository houseRepository) {
+    /**
+     * Constructor for the TeacherService class
+     * @param teacherRepository
+     * @param houseRepository
+     * @param courseRepository
+     */
+    public TeacherServiceImpl(TeacherRepository teacherRepository, HouseRepository houseRepository, CourseRepository courseRepository) {
         this.teacherRepository = teacherRepository;
         this.houseRepository = houseRepository;
+        this.courseRepository = courseRepository;
     }
 
-
+    /**
+     * Method to find all teachers
+     * @return a list of all teachers
+     */
     @Override
     public List<TeacherResponseDTO> findAllTeachers() {
         return teacherRepository.findAll().stream().map(this::toDTO).toList();
     }
 
+    /**
+     * Method to find a teacher by id
+     * @param id
+     * @return a teacher
+     */
     @Override
     public TeacherResponseDTO findTeacherById(Long id) {
         return teacherRepository.findById(id).map(this::toDTO).orElseThrow(() -> new EntityNotFoundException("Teacher", id));
     }
 
+    /**
+     * Method to save a teacher
+     * @param teacher
+     * @return a teacher
+     */
     @Override
     public TeacherResponseDTO saveTeacher(TeacherRequestDTO teacher) {
         return toDTO(teacherRepository.save(toEntity(teacher)));
     }
 
+    /**
+     * Method to update a teacher
+     * @param updatedTeacher
+     * @param id
+     * @return a teacher
+     */
     @Override
     @Transactional
     public TeacherResponseDTO updateTeacher(TeacherRequestDTO updatedTeacher, Long id) {
@@ -58,6 +89,12 @@ public class TeacherServiceImpl implements TeacherService{
         }).orElseThrow(() -> new EntityNotFoundException("Teacher", id));
     }
 
+    /**
+     * Method to update a teacher partially
+     * @param updatedTeacher
+     * @param id
+     * @return a teacher
+     */
     @Override
     @Transactional
     public TeacherResponseDTO updateTeacherPartially(TeacherRequestDTO updatedTeacher, Long id) {
@@ -84,15 +121,27 @@ public class TeacherServiceImpl implements TeacherService{
         return teacherOptional.map(this::toDTO).orElseThrow(() -> new EntityNotFoundException("Teacher", id));
     }
 
+    /**
+     * Method to delete a teacher
+     * @param id
+     * @return a teacher
+     */
     @Override
     @Transactional
     public TeacherResponseDTO deleteTeacher(Long id) {
         return teacherRepository.findById(id).map(teacher -> {
+            List<Long> courseIds = courseRepository.findCourseIdsByTeacherId(id);
+            courseIds.forEach(courseId -> courseRepository.deleteTeacherFromCourse(id));
             teacherRepository.delete(teacher);
             return toDTO(teacher);
         }).orElseThrow(() -> new EntityNotFoundException("Teacher", id));
     }
 
+    /**
+     * Method to convert a teacher to a DTO
+     * @param teacher
+     * @return a teacher DTO
+     */
     @Override
     public TeacherResponseDTO toDTO(Teacher teacher) {
         logger.info("Converting teacher to DTO: {}", teacher);
@@ -107,6 +156,11 @@ public class TeacherServiceImpl implements TeacherService{
         return new TeacherResponseDTO(teacher.getId(), name, dateOfbirth, house, isHeadOfHouse, employment, employmentStart, employmentEnd);
     }
 
+    /**
+     * Method to convert a teacher DTO to an entity
+     * @param teacherDTO
+     * @return a teacher
+     */
     @Override
     public Teacher toEntity(TeacherRequestDTO teacherDTO) {
         logger.info("Converting teacher DTO to entity: {}", teacherDTO);

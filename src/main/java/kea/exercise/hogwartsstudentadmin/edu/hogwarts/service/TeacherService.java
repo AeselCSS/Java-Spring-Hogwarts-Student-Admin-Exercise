@@ -8,6 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface for the TeacherService class
+ * @see kea.exercise.hogwartsstudentadmin.edu.hogwarts.service.TeacherServiceImpl
+ */
 public interface TeacherService {
     List<TeacherResponseDTO> findAllTeachers();
     TeacherResponseDTO findTeacherById(Long id);

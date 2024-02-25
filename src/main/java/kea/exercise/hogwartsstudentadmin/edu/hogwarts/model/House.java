@@ -5,16 +5,38 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.validator.MaxListSize;
 
 import java.util.List;
 
+/**
+ * The House class is a model that represents a house in the Hogwarts Student Admin system.
+ * It contains information about the name, founder, and colors of the house.
+ */
 @Entity
 public class House {
+    /**
+     * The name of the house.
+     * It is a string that represents the name of the house.
+     * It is the primary key of the house entity.
+     * It is not nullable.
+     */
     @Id
     private String name;
+
+    /**
+     * The founder of the house.
+     * It is a string that represents the founder of the house.
+     */
     private String founder;
+
+    /**
+     * The colors of the house.
+     * It is a list of strings that represents the colors of the house.
+     * It is a many-to-many relationship with the Color model.
+     * It is fetched eagerly.
+     * It is validated to have a maximum size of 2.
+     */
     @ElementCollection
     @MaxListSize(value = 2, message = "You can only have up to 2 colors")
     private List<String> colors;
 
-    // Constructors
     public House() {
     }
 

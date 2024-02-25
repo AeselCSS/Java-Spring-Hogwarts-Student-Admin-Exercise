@@ -5,8 +5,16 @@ import org.springframework.beans.BeanWrapperImpl;
 
 import java.beans.PropertyDescriptor;
 
+/**
+ * Utility class for miscellaneous methods
+ */
 public class MiscUtility {
-    // This method should copy all non-null properties from the source object to the target object, but it doesn't work properly.
+    /**
+     * Method to copy all non-null properties from the source object to the target object
+     * @param src
+     * @param target
+     * Does not work properly, is not used at the moment, but could be useful in the future
+     */
     public static void copyNonNullProperties(Object src, Object target) {
         // Create a BeanWrapper for the source object and the target object
         // NOTE: A BeanWrapper is a wrapper for a bean which allows easy access to the properties of the bean

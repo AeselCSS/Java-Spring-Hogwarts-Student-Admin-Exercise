@@ -8,10 +8,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Annotation to validate the size of a list
+ */
 // https://www.bezkoder.com/spring-boot-custom-validation/
-@Target({ElementType.FIELD, ElementType.METHOD}) // NOTE: This annotation can only be used on fields and methods
-@Retention(RetentionPolicy.RUNTIME) // NOTE: This annotation will be available at runtime
-@Constraint(validatedBy = ListSizeValidator.class) // NOTE: This annotation will be validated by ListSizeValidator
+/**
+ * The @Constraint annotation is used to define a custom constraint annotation.
+ * The @Target annotation is used to specify where the annotation can be used.
+ * The @Retention annotation is used to specify when the annotation will be available.
+ * The @Constraint annotation is used to specify the validator class for the annotation.
+ */
+@Target({ElementType.FIELD, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = ListSizeValidator.class)
+
 public @interface MaxListSize {
     int value();
     String message() default "List exceeds maximum size";

@@ -13,6 +13,8 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.TeacherReposito
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,7 @@ import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtili
  */
 @Service
 public class CourseServiceImpl implements CourseService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
@@ -35,11 +38,11 @@ public class CourseServiceImpl implements CourseService {
     /**
      * Constructor for CourseServiceImpl.
      *
-     * @param courseRepository   the repository for courses
-     * @param studentRepository  the repository for students
-     * @param teacherRepository  the repository for teachers
-     * @param studentService     the service for students
-     * @param teacherService     the service for teachers
+     * @param courseRepository  the repository for courses
+     * @param studentRepository the repository for students
+     * @param teacherRepository the repository for teachers
+     * @param studentService    the service for students
+     * @param teacherService    the service for teachers
      */
     public CourseServiceImpl(CourseRepository courseRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, StudentServiceImpl studentService, TeacherServiceImpl teacherService) {
         this.courseRepository = courseRepository;
@@ -200,19 +203,29 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public CourseResponseDTO updateCoursePartially(Long id, CourseRequestDTO courseData) {
+        logger.info("Partially updating course: {}", courseData);
         Optional<Course> courseOptional = courseRepository.findById(id);
         courseOptional.ifPresent(course -> {
             if (courseData.subject() != null) course.setSubject(courseData.subject());
-            if (courseData.schoolYear() != null) course.setSchoolYear(courseData.schoolYear());
+            if (courseData.schoolYear() != null) {
+                course.setSchoolYear(courseData.schoolYear());
+            }
             if (courseData.isCurrent() != null) course.setCurrent(courseData.isCurrent());
             if (courseData.teacherId() != null) {
                 Optional<Teacher> teacherOptional = teacherRepository.findById(courseData.teacherId());
                 teacherOptional.ifPresent(course::setTeacher);
             }
+            //
             if (courseData.studentIds() != null) {
                 List<Student> studentEntities = courseData.studentIds().stream().map(studentId -> studentRepository.findById(studentId).orElseThrow(() -> new EntityNotFoundException("Student", studentId))).toList();
-                checkStudentSchoolYear(courseData.schoolYear(), studentEntities);
-                course.getStudents().addAll(studentEntities);
+                if (courseData.schoolYear() != null) {
+                    checkStudentSchoolYear(courseData.schoolYear(), studentEntities);
+                } else {
+                    checkStudentSchoolYear(course.getSchoolYear(), studentEntities);
+                }
+                // clear students and add updated list of students
+                course.getStudents().clear();
+                studentEntities.forEach(course.getStudents()::add);
             }
             courseRepository.save(course);
         });

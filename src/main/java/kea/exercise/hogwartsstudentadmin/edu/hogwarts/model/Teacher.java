@@ -8,34 +8,90 @@ import java.time.LocalDate;
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.toFullName;
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.toNameParts;
 
+/**
+ * The Teacher class is a model that represents a teacher in the Hogwarts Student Admin system.
+ * It contains information about the first name, middle name, last name, date of birth, house, head of house status, employment status, and employment dates of the teacher.
+ */
 @Entity
 public class Teacher {
+    /**
+     * The id of the teacher.
+     * It is a unique identifier for the teacher and is generated automatically by the database.
+     * It is the primary key of the teacher entity.
+     * It is of type Long.
+     * It is not nullable.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * The first name of the teacher.
+     * It is a string that represents the first name of the teacher.
+     * It is not nullable.
+     */
     @NotBlank(message = "First name is mandatory")
     private String firstName;
     private String middleName;
 
+    /**
+     * The last name of the teacher.
+     * It is a string that represents the last name of the teacher.
+     * It is not nullable.
+     */
     @NotBlank(message = "Last name is mandatory")
     private String lastName;
 
+    /**
+     * The date of birth of the teacher.
+     * It is a LocalDate object that represents the date of birth of the teacher.
+     * It is not nullable.
+     * It must be in the past.
+     */
     @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
+    /**
+     * The house of the teacher.
+     * It is a House object that represents the house of the teacher.
+     * It is a many-to-one relationship with the House model.
+     * It is fetched eagerly.
+     * It is not nullable.
+     */
     @NotNull(message = "House is mandatory")
     @JoinColumn(name = "house")
     private @ManyToOne(fetch = FetchType.EAGER) House house;
 
+    /**
+     * The head of house status of the teacher.
+     * It is a boolean that represents whether the teacher is the head of house or not.
+     * It is not nullable.
+     */
     @NotNull(message = "Head of house status is mandatory")
     private boolean isHeadOfHouse;
 
-
+    /**
+     * The employment status of the teacher.
+     * It is an enumeration that represents the employment status of the teacher.
+     * It is not nullable.
+     */
     private @Enumerated(EnumType.STRING) EmpType employment;
 
+    /**
+     * The employment start date of the teacher.
+     * It is a LocalDate object that represents the employment start date of the teacher.
+     * It is not nullable.
+     * It must be in the past.
+     */
     @NotNull(message = "Employment start date is mandatory")
     private LocalDate employmentStart;
+
+    /**
+     * The employment end date of the teacher.
+     * It is a LocalDate object that represents the employment end date of the teacher.
+     * It is nullable.
+     * It must be in the future.
+     */
     private LocalDate employmentEnd;
 
     public Teacher() {

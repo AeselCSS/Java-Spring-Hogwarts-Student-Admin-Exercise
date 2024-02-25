@@ -10,19 +10,21 @@ import org.springframework.validation.FieldError;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Global exception handler
+ */
 @ControllerAdvice
-//NOTE: @ControllerAdvice is used to define a global exception handler
 public class GlobalExceptionHandler {
-    //NOTE: @ExceptionHandler is used to handle exceptions in specific handler classes and/or globally
+    /**
+     * Handles validation exceptions
+     * @param exception the exception
+     * @return a map of errors
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    //NOTE: @ResponseStatus is used to specify the HTTP response status code for the method
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    //NOTE: @ResponseBody is used to bind the method return value to the web response body
     @ResponseBody
-    // Handle validation exceptions by returning a map of field names and their corresponding error messages
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
-        // for each error in the exception, add the field name and error message to the map
         exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
@@ -31,6 +33,12 @@ public class GlobalExceptionHandler {
         // return the map of errors
         return errors;
     }
+
+    /**
+     * Handles entity not found exceptions
+     * @param exception the exception
+     * @return a map of errors
+     */
     @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -40,6 +48,11 @@ public class GlobalExceptionHandler {
         return errors;
     }
 
+    /**
+     * Handles resource not found exceptions
+     * @param exception the exception
+     * @return a map of errors
+     */
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -49,6 +62,11 @@ public class GlobalExceptionHandler {
         return errors;
     }
 
+    /**
+     * Handles school year mismatch exceptions
+     * @param exception the exception
+     * @return a map of errors
+     */
     @ExceptionHandler(SchoolYearMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody

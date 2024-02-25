@@ -6,6 +6,7 @@ import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.EntityNotFoundEx
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.exception.ResourceNotFoundException;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.House;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.model.Student;
+import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.CourseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.HouseRepository;
 import kea.exercise.hogwartsstudentadmin.edu.hogwarts.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -22,32 +23,63 @@ import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtili
 import static kea.exercise.hogwartsstudentadmin.edu.hogwarts.utility.StringUtility.toNameParts;
 
 
+/**
+ * Service class for the Student entity
+ */
 @Service
 public class StudentServiceImpl implements StudentService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final StudentRepository studentRepository;
     private final HouseRepository houseRepository;
+    private final CourseRepository courseRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository, HouseRepository houseRepository) {
+    /**
+     * Constructor for the StudentService class
+     * @param studentRepository
+     * @param houseRepository
+     * @param courseRepository
+     */
+    public StudentServiceImpl(StudentRepository studentRepository, HouseRepository houseRepository, CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
         this.houseRepository = houseRepository;
+        this.courseRepository = courseRepository;
     }
 
+    /**
+     * Method to find all students
+     * @return a list of all students
+     */
     @Override
     public List<StudentResponseDTO> findAllStudents() {
         return studentRepository.findAll().stream().map(this::toDTO).toList();
     }
 
+    /**
+     * Method to find a student by id
+     * @param id
+     * @return a student
+     */
     @Override
     public StudentResponseDTO findStudentById(Long id) {
         return studentRepository.findById(id).map(this::toDTO).orElseThrow(() -> new EntityNotFoundException("Student", id));
     }
 
+    /**
+     * Method to save a student
+     * @param student
+     * @return a student
+     */
     @Override
     public StudentResponseDTO saveStudent(StudentRequestDTO student) {
         return toDTO(studentRepository.save(toEntity(student)));
     }
 
+    /**
+     * Method to update a student
+     * @param updatedStudent
+     * @param id
+     * @return a student
+     */
     @Override
     @Transactional
     public StudentResponseDTO updateStudent(StudentRequestDTO updatedStudent, Long id) {
@@ -61,6 +93,12 @@ public class StudentServiceImpl implements StudentService {
         return studentOptional.map(this::toDTO).orElseThrow(() -> new EntityNotFoundException("Student", id));
     }
 
+    /**
+     * Method to update a student partially
+     * @param updatedStudent
+     * @param id
+     * @return a student
+     */
     @Override
     @Transactional
     public StudentResponseDTO updateStudentPartially(StudentRequestDTO updatedStudent, Long id) {
@@ -91,13 +129,27 @@ public class StudentServiceImpl implements StudentService {
         return studentOptional.map(this::toDTO).orElseThrow(() -> new EntityNotFoundException("Student", id));
     }
 
+    /**
+     * Method to delete a student
+     * @param id
+     * @return a student
+     */
     @Override
     public StudentResponseDTO deleteStudent(Long id) {
         Optional<Student> studentOptional = studentRepository.findById(id);
-        studentOptional.ifPresent(studentRepository::delete);
+        if (studentOptional.isPresent()) {
+            List<Long> courseIds = courseRepository.findCourseIdsByStudentId(id);
+            courseIds.forEach(courseId -> courseRepository.deleteStudentFromCourse(courseId, id));
+            studentRepository.deleteById(id);
+        }
         return studentOptional.map(this::toDTO).orElseThrow(() -> new EntityNotFoundException("Student", id));
     }
 
+    /**
+     * Method to convert a student to a DTO
+     * @param student
+     * @return a student DTO
+     */
     @Override
     public StudentResponseDTO toDTO(Student student) {
         logger.info("Converting student to DTO: {}", student);
@@ -116,6 +168,11 @@ public class StudentServiceImpl implements StudentService {
         return new StudentResponseDTO(student.getId(), name, dateOfBirth, house, isPrefect, enrollmentYear, graduationYear, isGraduated, schoolYear);
     }
 
+    /**
+     * Method to convert a student DTO to an entity
+     * @param studentDTO
+     * @return a student
+     */
     @Override
     public Student toEntity(StudentRequestDTO studentDTO) {
         logger.info("Converting student DTO to entity: {}", studentDTO);
